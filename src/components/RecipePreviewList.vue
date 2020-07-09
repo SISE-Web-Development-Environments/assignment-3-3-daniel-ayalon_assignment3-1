@@ -35,6 +35,7 @@ export default {
   },
   methods: {
     async updateRecipes() {
+      this.axios.defaults.withCredentials=true;
       try {
         const response = await this.axios.get(
           "http://localhost:3000/recipes/randomRecipes"

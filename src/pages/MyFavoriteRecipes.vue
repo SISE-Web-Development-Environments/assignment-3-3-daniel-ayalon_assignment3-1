@@ -25,23 +25,24 @@
   },
     data(){
         return{ 
-            recipes: null
+            Favoriterecipes: null
     }
     },
  mounted() {
-    this.showRecipes();
+    this.showPPersonalRecipes();
  },
     
     methods: {
-    async showRecipes(){
+    async showPPersonalRecipes(){
+        this.axios.defaults.withCredentials=true;
         try {
         const response = await this.axios.get(
           "http://localhost:3000/user/FavoriteRecipes"
         );
         // console.log(response);
-        const FavoriteRecipes = response.data;
-        this.recipes = [];
-        this.recipes.push(...FavoriteRecipes);
+        const FavRecipes = response.data;
+        this.FavRecipes = [];
+        this.FavRecipes.push(...FavRecipes);
         // console.log(this.recipes);
       } catch (error) {
         console.log(error);

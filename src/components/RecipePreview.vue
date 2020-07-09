@@ -10,10 +10,26 @@
       <div :title="recipe.title" class="recipe-title">
         {{ recipe.title }}
       </div>
+<<<<<<< HEAD
       <ul class="recipe-overview">
         <li>{{ recipe.readyInMinutes }} minutes</li>
         <li>{{ recipe.like }} likes</li>
       </ul>
+=======
+      <!-- <ul class="recipe-overview"> -->
+        <li>minutes:{{ recipe.readyInMinutes }} </li>
+        <li>likes:{{ recipe.like }} </li>
+       <li> vegetarian:{{recipe.vegetarian}}  </li>
+        <li>glutenFree: {{recipe.glutenFree}} </li>
+         <li >vegan: {{recipe.vegan}} </li>
+        <div v-if="setCookie()">
+          <div>watched: {{ recipe.watched }}</div>
+         </div> 
+        <div v-if="setCookie()">
+          <div>saved: {{ recipe.saved }}</div>
+          </div> 
+      <!-- </ul> -->
+>>>>>>> a401a7686f8315db9c37c35a0cf8831406905f26
     </div>
   </router-link>
 </template>
@@ -55,7 +71,13 @@ export default {
     //     return undefined;
     //   }
     // }
-  }
+  },
+  methods: {
+    async setCookie(){
+       return window.$cookies.isKey('session');
+       
+        }
+}
 };
 </script>
 

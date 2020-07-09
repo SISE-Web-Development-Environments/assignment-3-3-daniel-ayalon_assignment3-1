@@ -9,6 +9,7 @@
         <div class="wrapper">
           <div class="wrapped">
             <div class="mb-3">
+<<<<<<< HEAD
              <li>minutes:{{ recipe.readyInMinutes }} </li>
              <li>likes:{{ recipe.like }} </li>
              <li v-if="recipe.watched">watched: {{ recipe.watched }}</li>
@@ -16,6 +17,11 @@
              <li> vegetarian:{{recipe.vegetarian}}  </li>
              <li>glutenFree: {{recipe.glutenFree}} </li>
              <li >vegan: {{recipe.vegan}} </li>
+=======
+              <div>Ready in {{ recipe.readyInMinutes }} minutes</div>
+              <div>Likes: {{ recipe.aggregateLikes }} likes</div>
+             
+>>>>>>> a401a7686f8315db9c37c35a0cf8831406905f26
             </div>
             Ingredients:
             <ul>

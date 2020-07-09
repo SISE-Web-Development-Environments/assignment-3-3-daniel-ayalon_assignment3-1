@@ -33,11 +33,11 @@
     
     methods: {
     async showRecipes(){
+        this.axios.defaults.withCredentials=true;
         try {
         const response = await this.axios.get(
-          "http://localhost:3000/user//PersonalRecipes"
+          "http://localhost:3000/user/PersonalRecipes"
         );
-        // console.log(response);
         const PersonalRecipes = response.data;
         this.persRecipes = [];
         this.persRecipes.push(...PersonalRecipes);
