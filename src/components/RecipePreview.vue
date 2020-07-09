@@ -13,11 +13,15 @@
       <!-- <ul class="recipe-overview"> -->
         <li>minutes:{{ recipe.readyInMinutes }} </li>
         <li>likes:{{ recipe.like }} </li>
-        <li v-if="recipe.watched">watched: {{ recipe.watched }}</li>
-        <li v-if="recipe.saved">saved: {{ recipe.saved }}</li>
        <li> vegetarian:{{recipe.vegetarian}}  </li>
         <li>glutenFree: {{recipe.glutenFree}} </li>
          <li >vegan: {{recipe.vegan}} </li>
+        <div v-if="setCookie()">
+          <div>watched: {{ recipe.watched }}</div>
+         </div> 
+        <div v-if="setCookie()">
+          <div>saved: {{ recipe.saved }}</div>
+          </div> 
       <!-- </ul> -->
     </div>
   </router-link>
@@ -59,7 +63,13 @@ export default {
     //     return undefined;
     //   }
     // }
-  }
+  },
+  methods: {
+    async setCookie(){
+       return window.$cookies.isKey('session');
+       
+        }
+}
 };
 </script>
 

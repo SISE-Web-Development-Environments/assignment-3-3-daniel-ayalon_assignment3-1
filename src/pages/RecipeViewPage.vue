@@ -11,8 +11,7 @@
             <div class="mb-3">
               <div>Ready in {{ recipe.readyInMinutes }} minutes</div>
               <div>Likes: {{ recipe.aggregateLikes }} likes</div>
-              <div v-if="recipe.watched">watched: {{ recipe.watched }}</div>
-              <div v-if="recipe.saved">saved: {{ recipe.saved }}</div>
+             
             </div>
             Ingredients:
             <ul>

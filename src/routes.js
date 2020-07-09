@@ -37,6 +37,13 @@ path: "/user/PersonalRecipes",
 name: "PersonalRecipes",
 component: () => import("./pages/PersonalRecipes"),
 },
+{
+  path: "/user/myFamilyRecipes",
+  name: "FamilyRecipesPage",
+  component: () => import("./pages/FamilyRecipesPage"),
+  },
+  
+  
   {
     path: "*",
     name: "notFound",
