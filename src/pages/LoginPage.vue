@@ -94,11 +94,12 @@ export default {
     async Login() {
       try {
         const response = await this.axios.post(
-          "https://test-for-3-2.herokuapp.com/user/Login",
+          "http://localhost:3000/auth/Login",
           {
             username: this.form.username,
             password: this.form.password
-          }
+          },
+          {withCredentials: true}
         );
         // console.log(response);
         // this.$root.loggedIn = true;

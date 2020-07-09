@@ -11,6 +11,8 @@
             <div class="mb-3">
               <div>Ready in {{ recipe.readyInMinutes }} minutes</div>
               <div>Likes: {{ recipe.aggregateLikes }} likes</div>
+              <div v-if="recipe.watched">watched: {{ recipe.watched }}</div>
+              <div v-if="recipe.saved">saved: {{ recipe.saved }}</div>
             </div>
             Ingredients:
             <ul>
@@ -55,10 +57,7 @@ export default {
 
       try {
         response = await this.axios.get(
-          "https://test-for-3-2.herokuapp.com/recipes/info",
-          {
-            params: { id: this.$route.params.recipeId }
-          }
+          `http://localhost:3000/recipes/recipepage/recipeID/${this.$route.params.recipeId}`,
         );
 
         // console.log("response.status", response.status);
@@ -76,7 +75,8 @@ export default {
         aggregateLikes,
         readyInMinutes,
         image,
-        title
+        title,
+       
       } = response.data.recipe;
 
       let _instructions = analyzedInstructions
@@ -86,6 +86,9 @@ export default {
         })
         .reduce((a, b) => [...a, ...b], []);
 
+      
+      
+      
       let _recipe = {
         instructions,
         _instructions,
@@ -94,7 +97,8 @@ export default {
         aggregateLikes,
         readyInMinutes,
         image,
-        title
+        title,
+       
       };
 
       this.recipe = _recipe;
