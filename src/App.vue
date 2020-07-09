@@ -1,37 +1,23 @@
 <template>
+
+
+
   <div>
-  <!-- <div id="app"> -->
-    <!-- <div id="nav"> -->
-      <b-navbar toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand href="#">NavBar</b-navbar-brand>
+    <b-navbar toggleable="lg" type="dark" variant="info">
+      <b-navbar-brand href="#"></b-navbar-brand>
 
-    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav>
-        <b-nav-item to="/">main</b-nav-item>
-        <b-nav-item to="/about" disabled>About</b-nav-item>
-        <b-nav-item to="/search" disabled>search</b-nav-item>
-      </b-navbar-nav>
-        
+        <b-navbar-nav>
+          <b-nav-item to="/">Main</b-nav-item>
+          <b-nav-item to="/register">Register</b-nav-item>
+          <b-nav-item to="/login">Login</b-nav-item>
+          <b-nav-item to="/about" disabled>About</b-nav-item>
+          <b-nav-item to="/search" disabled>search</b-nav-item>
+        </b-navbar-nav>
 
-      <!-- <b-nav-item href='main'>Home</b-nav-item>
-      <router-link :to="{ name: 'main' }">Vue Recipes</router-link>|
-      <router-link :to="{ name: 'search' }">Search</router-link>|
-      <router-link :to="{ name: 'PersonalRecipes' }">PersonalRecipes</router-link>|
-      <router-link :to="{ name: 'MyFavoriteRecipes' }">FavoriteRecipes</router-link>|
-      <router-link :to="{ name: 'FamilyRecipesPage' }">FamilyRecipes</router-link>| -->
-      <b-navbar-nav class="ml-auto">
-      {{ !$root.store.username }}
-      <span v-if="!$root.store.username">
-        Guest:
-         <b-nav-item  to="/register" >Register</b-nav-item>||
-        <b-nav-item  to="/login">Login</b-nav-item>|
-       
-      </span>
-      <span v-else>
-        {{ $root.store.username }}: <button @click="Logout">Logout</button>|
-      </span>
-    <b-nav-item-dropdown  right>
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item-dropdown right>
             <template v-slot:button-content>
               <em>Personal</em>
             </template>
@@ -39,16 +25,24 @@
             <b-dropdown-item to="/PersonalRecipes">My Recipes</b-dropdown-item>
             <b-dropdown-item to="/FamilyRecipesPage">My Family Recipes</b-dropdown-item>
           </b-nav-item-dropdown>
-    </b-navbar-nav>
-    </b-collapse>
-  </b-navbar>
-    <!-- <router-view /> -->
+          <b-nav-item  disabled>
+            <span v-if="!$root.store.username" class="isConnecting"><strong  style="color:black">Guest</strong></span>
+
+            <span v-else>
+              <strong style="color:black">{{$root.store.username}}</strong>
+              <button id="logOutBtn" @click="Logout"><Strong>Logout</Strong></button>
+            </span>
+          </b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+    <router-view />
   </div>
 </template>
 
 <script>
 export default {
-  name: "App",
+  name: "app",
   methods: {
     Logout() {
       this.$root.store.logout();
@@ -85,4 +79,17 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+#isConnecting {
+  color: red;
+}
+#logOutBtn {
+  margin-left: 10px;
+  transition-duration: 0.4s;
+  background-color: black;
+  color: whitesmoke;
+  padding: 10px;
+  border-radius: 100%;
+}
+
 </style>

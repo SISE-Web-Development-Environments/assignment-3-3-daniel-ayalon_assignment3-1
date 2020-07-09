@@ -1,9 +1,7 @@
 <template>
-
   <b-container>
-    <h3 >
+    <h3>
       favorite recipes
-      
       <slot></slot>
     </h3>
     <b-row>
@@ -17,25 +15,25 @@
 
 
     <script>
-       import RecipePreview from "../components/RecipePreview.vue";
-        export default {
-             name: "MyFavoriteRecipes",
+import RecipePreview from "../components/RecipePreview.vue";
+export default {
+  name: "MyFavoriteRecipes",
   components: {
     RecipePreview
   },
-    data(){
-        return{ 
-            Favoriterecipes: null
-    }
-    },
- mounted() {
+  data() {
+    return {
+      Favoriterecipes: null
+    };
+  },
+  mounted() {
     this.showPPersonalRecipes();
- },
-    
-    methods: {
-    async showPPersonalRecipes(){
-        this.axios.defaults.withCredentials=true;
-        try {
+  },
+
+  methods: {
+    async showPPersonalRecipes() {
+      this.axios.defaults.withCredentials = true;
+      try {
         const response = await this.axios.get(
           "http://localhost:3000/user/FavoriteRecipes"
         );
@@ -50,7 +48,6 @@
     }
   }
 };
-
 </script>
 <style lang="scss" scoped>
 .RandomRecipes {

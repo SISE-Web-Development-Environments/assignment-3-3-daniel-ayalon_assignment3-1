@@ -1,8 +1,6 @@
 <template>
-
   <b-container>
-    <h3 >
-     
+    <h3>
       <slot></slot>
     </h3>
     <b-row>
@@ -16,25 +14,25 @@
 
 
     <script>
-       import RecipePreview from "../components/RecipePreview.vue";
-        export default {
-             name: "PersonalRecipes",
+import RecipePreview from "../components/RecipePreview.vue";
+export default {
+  name: "PersonalRecipes",
   components: {
     RecipePreview
   },
-    data(){
-        return{ 
-            persRecipes: null
-    }
-    },
- mounted() {
+  data() {
+    return {
+      persRecipes: null
+    };
+  },
+  mounted() {
     this.showRecipes();
- },
-    
-    methods: {
-    async showRecipes(){
-        this.axios.defaults.withCredentials=true;
-        try {
+  },
+
+  methods: {
+    async showRecipes() {
+      this.axios.defaults.withCredentials = true;
+      try {
         const response = await this.axios.get(
           "http://localhost:3000/user/PersonalRecipes"
         );
@@ -48,7 +46,6 @@
     }
   }
 };
-
 </script>
 <style lang="scss" scoped>
 .RandomRecipes {

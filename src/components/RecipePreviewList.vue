@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     async updateRecipes() {
-      this.axios.defaults.withCredentials=true;
+      this.axios.defaults.withCredentials = true;
       try {
         const response = await this.axios.get(
           "http://localhost:3000/recipes/randomRecipes"
@@ -45,7 +45,7 @@ export default {
         const recipes = response.data;
         this.recipes = [];
         this.recipes.push(...recipes);
-      //   console.log(this.recipes);
+        //   console.log(this.recipes);
       } catch (error) {
         console.log(error);
       }

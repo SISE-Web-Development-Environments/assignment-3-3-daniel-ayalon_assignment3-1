@@ -45,18 +45,15 @@
 
 <script>
 export default {
- 
   data() {
-    return {
-     
-    };
+    return {};
   },
   props: {
     recipe: {
       type: Object,
       required: true
     }
-    }
+  }
 };
 </script>
 
