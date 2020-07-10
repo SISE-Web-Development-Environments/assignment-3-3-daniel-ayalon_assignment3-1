@@ -28,22 +28,25 @@ const routes = [
     component: () => import("./pages/RecipeViewPage"),
   },
   {
-  path: "/user/FavoriteRecipes",
+  path: "/FavoriteRecipes",
   name: "MyFavoriteRecipes",
   component: () => import("./pages/MyFavoriteRecipes"),
 },
 {
-path: "/user/PersonalRecipes",
+path: "/PersonalRecipes",
 name: "PersonalRecipes",
 component: () => import("./pages/PersonalRecipes"),
 },
 {
-  path: "/user/myFamilyRecipes",
+  path: "/myFamilyRecipes",
   name: "FamilyRecipesPage",
   component: () => import("./pages/FamilyRecipesPage"),
   },
-  
-  
+  {
+  path: "/createFavoritePage",
+  name: "createFavoritePage",
+  component: () => import("./pages/createFavoritePage"),
+  },  
   {
     path: "*",
     name: "notFound",

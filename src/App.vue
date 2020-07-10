@@ -14,15 +14,16 @@
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
-          <b-nav-item-dropdown right>
+          <b-nav-item-dropdown v-if="$root.store.username" right>
             <template v-slot:button-content>
               <em>Personal</em>
             </template>
-            <b-dropdown-item to="/MyFavoriteRecipes">My Favorites</b-dropdown-item>
+            <b-dropdown-item to="/FavoriteRecipes">My Favorites</b-dropdown-item>
             <b-dropdown-item to="/PersonalRecipes">My Recipes</b-dropdown-item>
-            <b-dropdown-item to="/FamilyRecipesPage">My Family Recipes</b-dropdown-item>
+            <b-dropdown-item to="/myFamilyRecipes">My Family Recipes</b-dropdown-item>
           </b-nav-item-dropdown>
-          <b-nav-item disabled>
+          <b-nav-item v-if="$root.store.username" @click="Logout" to="/">Log out</b-nav-item>
+          <!-- <b-nav-item disabled>
             <span v-if="!$root.store.username" class="isConnecting">
               <strong style="color:black">Guest</strong>
             </span>
@@ -33,7 +34,7 @@
                 <Strong>Logout</Strong>
               </button>
             </span>
-          </b-nav-item>
+          </b-nav-item> -->
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
