@@ -7,6 +7,7 @@
       <div :title="recipe.title" class="recipe-title">
         <b>{{ recipe.title }}</b>
       </div>
+      <div class="details">
       <li>minutes:{{ recipe.readyInMinutes }}</li>
       <li>likes:{{ recipe.like }}</li>
       <li>vegetarian:{{recipe.vegetarian}}</li>
@@ -14,6 +15,7 @@
       <li>vegan: {{recipe.vegan}}</li>
       <li v-if="setCookie()">watched: {{ recipe.watched }}</li>
       <li v-if="setCookie()">saved: {{ recipe.saved }}</li>
+      </div>
     </div>
   </router-link>
 </template>
@@ -135,5 +137,9 @@ export default {
   width: 90px;
   display: table-cell;
   text-align: center;
+}
+
+.details{
+  text-align: left;
 }
 </style>
