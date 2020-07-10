@@ -1,5 +1,5 @@
 <template>
- 
+<div>
   <router-link
     :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
     class="recipe-preview"
@@ -21,14 +21,16 @@
         <li v-if="$root.store.username">watched: {{ recipe.watched }}</li> 
         <li v-if="$root.store.username">saved: {{ recipe.saved }}</li> 
         </div>
+        </div>
+        </router-link>
         <li v-if="$root.store.username">
         <!-- <router-link :to="{name:'createFavoritePage', params: { recipeId: recipe.id,recipeTitle:recipe.title,recipeImg: recipe.image,reipeTime:recipe.readyInMinutes,recipeLike:recipe.like,recipeVeg:recipe.vegetarian,recipeGlut:recipe.glutenFree,recipeVegan:recipe.vegan  }}" class="recipe-preview" > -->
             <button @click="addToFavorite()"> add to favorite</button>    
         <!-- </router-link> -->
         </li>
-      
-    </div>
-    </router-link>   
+      </div>
+    
+       
 </template>
 
 <script>
@@ -73,9 +75,10 @@ export default {
           this.axios.defaults.withCredentials = true;
       try {
         const response = await this.axios.post(
-          "http://localhost:3000/user/FavoriteRecipes",
-          {
-           recipe_id:recipe.id,
+          "http://localhost:3000/user/FavoriteRecipes",{
+           
+          
+          recipe_id:recipe.id,
            title:recipe.title,
            readyInMinutes:recipe.readyInMinutes,
            image:recipe.image,
