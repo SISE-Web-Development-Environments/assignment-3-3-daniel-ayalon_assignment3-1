@@ -1,7 +1,4 @@
 <template>
-
-
-
   <div>
     <b-navbar toggleable="lg" type="dark" variant="info">
       <b-navbar-brand href="#"></b-navbar-brand>
@@ -25,12 +22,16 @@
             <b-dropdown-item to="/PersonalRecipes">My Recipes</b-dropdown-item>
             <b-dropdown-item to="/FamilyRecipesPage">My Family Recipes</b-dropdown-item>
           </b-nav-item-dropdown>
-          <b-nav-item  disabled>
-            <span v-if="!$root.store.username" class="isConnecting"><strong  style="color:black">Guest</strong></span>
+          <b-nav-item disabled>
+            <span v-if="!$root.store.username" class="isConnecting">
+              <strong style="color:black">Guest</strong>
+            </span>
 
             <span v-else>
               <strong style="color:black">{{$root.store.username}}</strong>
-              <button id="logOutBtn" @click="Logout"><Strong>Logout</Strong></button>
+              <button id="logOutBtn" @click="Logout">
+                <Strong>Logout</Strong>
+              </button>
             </span>
           </b-nav-item>
         </b-navbar-nav>
@@ -91,5 +92,4 @@ export default {
   padding: 10px;
   border-radius: 100%;
 }
-
 </style>
