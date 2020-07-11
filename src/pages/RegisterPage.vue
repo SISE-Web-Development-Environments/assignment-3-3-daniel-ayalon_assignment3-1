@@ -2,123 +2,121 @@
   <div class="container">
     <h1 class="title">Register</h1>
     <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
-      <b-form-group
-        id="input-group-username"
-        label-cols-sm="3"
-        label="Username:"
-        label-for="username"
-      >
-        <b-form-input
-          id="username"
-          v-model="$v.form.username.$model"
-          type="text"
-          placeholder="Enter user name..."
-          :state="validateState('username')"
-        ></b-form-input>
+
+
+<!-----------------------------------------------------------------------User Name-------------------------------------------------------------------------------->
+      <b-form-group id="input-group-username" label-cols-sm="3" label="Username:" label-for="username">
+        <b-form-input id="username" v-model="$v.form.username.$model" type="text" placeholder="Enter user name..." :state="validateState('username')" ></b-form-input>
         <b-form-invalid-feedback v-if="!$v.form.username.required">Username is required</b-form-invalid-feedback>
-        <b-form-invalid-feedback
-          v-else-if="!$v.form.username.length"
-        >Username length should be between 3-8 characters long</b-form-invalid-feedback>
+        <b-form-invalid-feedback v-else-if="!$v.form.username.length">Username length should be between 3-8 characters long</b-form-invalid-feedback>
         <b-form-invalid-feedback v-if="!$v.form.username.alpha">Username can include only letters</b-form-invalid-feedback>
       </b-form-group>
+<!---------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-      <b-form-group
-        id="input-group-firstName"
-        label-cols-sm="3"
-        label="First Name:"
-        label-for="firstName"
-      >
-        <b-form-input
-          id="firstName"
-          v-model="$v.form.firstName.$model"
-          type="text"
-          :state="validateState('firstName')"
-          placeholder="Enter first name..."
-        ></b-form-input>
+
+
+
+
+
+<!------------------------------------------------------------------------First Name------------------------------------------------------------------------------>
+      <b-form-group id="input-group-firstName" label-cols-sm="3" label="First Name:" label-for="firstName">
+        <b-form-input id="firstName" v-model="$v.form.firstName.$model" type="text" :state="validateState('firstName')" placeholder="Enter first name..."></b-form-input>
         <b-form-invalid-feedback v-if="!$v.form.firstName.required">First name is required</b-form-invalid-feedback>
       </b-form-group>
+<!---------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-      <b-form-group
-        id="input-group-firstName"
-        label-cols-sm="3"
-        label="Last Name:"
-        label-for="lastName"
-      >
-        <b-form-input
-          id="lastName"
-          v-model="$v.form.lastName.$model"
-          type="text"
-          :state="validateState('lastName')"
-          placeholder="Enter last name..."
-        ></b-form-input>
+
+
+
+
+<!-------------------------------------------------------------------------Last Name------------------------------------------------------------------------------->
+      <b-form-group id="input-group-lastName" label-cols-sm="3" label="Last Name:" label-for="lastName">
+        <b-form-input id="lastName" v-model="$v.form.lastName.$model" type="text" :state="validateState('lastName')" placeholder="Enter last name..."> </b-form-input>
         <b-form-invalid-feedback v-if="!$v.form.lastName.required">Last name is required</b-form-invalid-feedback>
       </b-form-group>
+<!---------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-      <b-form-group id="input-group-firstName" label-cols-sm="3" label="Email:" label-for="email">
-        <b-form-input
-          id="email"
-          v-model="$v.form.email.$model"
-          type="email"
-          :state="validateState('email')"
-          placeholder="Enter email..."
-        ></b-form-input>
+
+
+
+
+
+<!-----------------------------------------------------------------------------Email------------------------------------------------------------------------------>
+
+      <b-form-group id="input-group-email" label-cols-sm="3" label="Email:" label-for="email">
+        <b-form-input id="email" v-model="$v.form.email.$model" type="email" :state="validateState('email')" placeholder="Enter email..."></b-form-input>
         <b-form-invalid-feedback v-if="!$v.form.email.required">Email is required</b-form-invalid-feedback>
+        <b-form-invalid-feedback v-if="!$v.form.email.email">Email must be valid</b-form-invalid-feedback>
       </b-form-group>
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+
+
+
+<!----------------------------------------------------------------------------Country------------------------------------------------------------------------------>
 
       <b-form-group id="input-group-country" label-cols-sm="3" label="Country:" label-for="country">
-        <b-form-select
-          id="country"
-          v-model="$v.form.country.$model"
-          :options="countries"
-          :state="validateState('country')"
-        ></b-form-select>
+        <b-form-select id="country" v-model="$v.form.country.$model" :options="countries" :state="validateState('country')"></b-form-select>
         <b-form-invalid-feedback>Country is required</b-form-invalid-feedback>
       </b-form-group>
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------------>
 
-      <b-form-group
-        id="input-group-Password"
-        label-cols-sm="3"
-        label="Password:"
-        label-for="password"
-      >
-        <b-form-input
-          id="password"
-          type="password"
-          placeholder="enter strong password..."
-          v-model="$v.form.password.$model"
-          :state="validateState('password')"
-        ></b-form-input>
+
+
+
+
+
+
+<!-- ------------------------------------------------------------------------ Password------------------------------------------------------------------------------>
+      <b-form-group id="input-group-Password" label-cols-sm="3" label="Password:" label-for="password">
+        <b-form-input id="password" type="password" placeholder="Enter strong password..." v-model="$v.form.password.$model" :state="validateState('password')"></b-form-input>
         <b-form-invalid-feedback v-if="!$v.form.password.required">Password is required</b-form-invalid-feedback>
-        <b-form-text v-else-if="$v.form.password.$error" text-variant="info">
-          Your password should be
-          <strong>strong</strong>.
-          <br />For that, your password should be also:
-        </b-form-text>
-        <b-form-invalid-feedback
-          v-if="$v.form.password.required && !$v.form.password.length"
-        >Have length between 5-10 characters long</b-form-invalid-feedback>
+        <b-form-text v-else-if="$v.form.password.$error" text-variant="info">Your password should be<strong> strong</strong>.<br/></b-form-text>
+        <b-form-invalid-feedback v-if="$v.form.password.required && !$v.form.password.length">Have length between 5-10 characters long</b-form-invalid-feedback>
+        <b-form-invalid-feedback v-if="!$v.form.password.special">
+          Your password should have at least one number  and one special character
+        </b-form-invalid-feedback> 
       </b-form-group>
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-      <b-form-group
-        id="input-group-confirmPassword"
-        label-cols-sm="3"
-        label="Confirm Password:"
-        label-for="confirmPassword"
-      >
-        <b-form-input
-          id="confirmPassword"
-          type="password"
-          placeholder="enetr again same password..."
-          v-model="$v.form.confirmPassword.$model"
-          :state="validateState('confirmPassword')"
-        ></b-form-input>
-        <b-form-invalid-feedback
-          v-if="!$v.form.confirmPassword.required"
-        >Password confirmation is required</b-form-invalid-feedback>
-        <b-form-invalid-feedback
-          v-else-if="!$v.form.confirmPassword.sameAsPassword"
-        >The confirmed password is not equal to the original password</b-form-invalid-feedback>
+
+
+
+
+
+<!-----------------------------------------------------------------------------Confirm Password----------------------------------------------------------------------->
+      <b-form-group id="input-group-confirmPassword" label-cols-sm="3" label="Confirm Password:" label-for="confirmPassword">
+        <b-form-input id="confirmPassword" 
+                      type="password" 
+                      placeholder="Enetr again same password..." 
+                      v-model="$v.form.confirmPassword.$model" 
+                      :state="validateState('confirmPassword')"
+        >
+        </b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.confirmPassword.required">Password confirmation is required</b-form-invalid-feedback>
+        <b-form-invalid-feedback v-else-if="!$v.form.confirmPassword.sameAsPassword">The confirmed password is not equal to the original password</b-form-invalid-feedback>
       </b-form-group>
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+
+
+<!--------------------------------------------------------------------------------Image----------------------------------------------------------------------------------->
+
+      <b-form-group id="input-group-Image" label-cols-sm="3" label="Image:" label-for="image">
+        <b-form-input
+          id="image"
+          type="image"
+          placeholder="Enter"
+          v-model="$v.form.image.$model"
+          :state="validateState('image')"
+        ></b-form-input>
+      </b-form-group>
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
 
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button type="submit" variant="primary" style="width:250px;" class="ml-5 w-75">Register</b-button>
@@ -134,10 +132,7 @@
       dismissible
       show
     >Register failed: {{ form.submitError }}</b-alert>
-    <!-- <b-card class="mt-3 md-3" header="Form Data Result">
-      <pre class="m-0"><strong>form:</strong> {{ form }}</pre>
-      <pre class="m-0"><strong>$v.form:</strong> {{ $v.form }}</pre>
-    </b-card>-->
+ 
   </div>
 </template>
 
@@ -164,6 +159,7 @@ export default {
         password: "",
         confirmPassword: "",
         email: "",
+        image:"",
         submitError: undefined
       },
       countries: [{ value: null, text: "", disabled: true }],
@@ -183,7 +179,9 @@ export default {
       },
       password: {
         required,
-        length: p => minLength(5)(p) && maxLength(10)(p)
+        length: p => minLength(5)(p) && maxLength(10)(p),
+        special: u =>
+          new RegExp("^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])").test(u)
       },
       confirmPassword: {
         required,
@@ -198,7 +196,11 @@ export default {
         alpha
       },
       email: {
-        required
+        required,
+        email
+      },
+      image: {
+
       }
     }
   },
@@ -212,6 +214,7 @@ export default {
       const { $dirty, $error } = this.$v.form[param];
       return $dirty ? !$error : null;
     },
+
     async Register() {
       try {
         const response = await this.axios.post(
@@ -223,7 +226,8 @@ export default {
             firstName: this.form.firstName,
             lastName: this.form.lastName,
             country: this.form.country,
-            email: this.form.email
+            email: this.form.email,
+            image: this.form.image
           }
         );
         this.$router.push("/login");
@@ -250,7 +254,8 @@ export default {
         country: null,
         password: "",
         confirmPassword: "",
-        email: ""
+        email: "",
+        image: ""
       };
       this.$nextTick(() => {
         this.$v.$reset();
@@ -262,5 +267,6 @@ export default {
 <style lang="scss" scoped>
 .container {
   max-width: 500px;
+  text-align: center;
 }
 </style>

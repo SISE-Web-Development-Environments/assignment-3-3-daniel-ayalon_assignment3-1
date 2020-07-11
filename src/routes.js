@@ -28,27 +28,34 @@ const routes = [
     component: () => import("./pages/RecipeViewPage"),
   },
   {
-  path: "/user/FavoriteRecipes",
-  name: "MyFavoriteRecipes",
-  component: () => import("./pages/MyFavoriteRecipes"),
-},
-{
-path: "/user/PersonalRecipes",
-name: "PersonalRecipes",
-component: () => import("./pages/PersonalRecipes"),
-},
-{
-  path: "/user/myFamilyRecipes",
-  name: "FamilyRecipesPage",
-  component: () => import("./pages/FamilyRecipesPage"),
+    path: "/user/FavoriteRecipes",
+    name: "MyFavoriteRecipes",
+    component: () => import("./pages/MyFavoriteRecipes"),
   },
-  
-  
+  {
+    path: "/user/PersonalRecipes",
+    name: "PersonalRecipes",
+    component: () => import("./pages/PersonalRecipes"),
+  },
+  {
+    path: "/user/myFamilyRecipes",
+    name: "FamilyRecipesPage",
+    component: () => import("./pages/FamilyRecipesPage"),
+  },
+
+
   {
     path: "*",
     name: "notFound",
     component: NotFound,
   },
+
+
+  {
+    path: "/About",
+    name: "About",
+    component: ()=> import("./pages/About"),
+  }
 ];
 
 export default routes;
