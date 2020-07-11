@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="allPage">
     <b-navbar toggleable="lg" type="dark" variant="info">
       <b-navbar-brand href="#"></b-navbar-brand>
 
@@ -9,7 +9,7 @@
           <b-nav-item to="/">Main</b-nav-item>
           <b-nav-item to="/register">Register</b-nav-item>
           <b-nav-item to="/login">Login</b-nav-item>
-          <b-nav-item to="/about" disabled>About</b-nav-item>
+          <b-nav-item to="/about" >About</b-nav-item>
           <b-nav-item to="/search" disabled>search</b-nav-item>
         </b-navbar-nav>
 
@@ -23,22 +23,10 @@
             <b-dropdown-item to="/myFamilyRecipes">My Family Recipes</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item v-if="$root.store.username" @click="Logout" to="/">Log out</b-nav-item>
-          <!-- <b-nav-item disabled>
-            <span v-if="!$root.store.username" class="isConnecting">
-              <strong style="color:black">Guest</strong>
-            </span>
-
-            <span v-else>
-              <strong style="color:black">{{$root.store.username}}</strong>
-              <button id="logOutBtn" @click="Logout">
-                <Strong>Logout</Strong>
-              </button>
-            </span>
-          </b-nav-item> -->
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <router-view />
+    <router-view id="app"/>
   </div>
 </template>
 
@@ -59,38 +47,58 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/scss/form-style.scss";
+// @import "@/scss/form-style.scss";
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: black;
   min-height: 100vh;
 }
 
-#nav {
-  padding: 30px;
+// #nav {
+//   padding: 30px;
+// }
+
+// #nav a {
+//   font-weight: bold;
+//   color: #2c3e50;
+// }
+
+// #nav a.router-link-exact-active {
+//   color: #42b983;
+// }
+
+// #isConnecting {
+//   color: red;
+// }
+// #logOutBtn {
+//   margin-left: 10px;
+//   transition-duration: 0.4s;
+//   background-color: black;
+//   color: whitesmoke;
+//   padding: 10px;
+//   border-radius: 100%;
+// }
+
+.allPage{
+   background-image:url("../src/images/cuttingBoard.jpg");
+  height: 100%; /* You must set a specified height */
+  width: 100%;
+  // background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; 
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-
-#isConnecting {
-  color: red;
-}
-#logOutBtn {
-  margin-left: 10px;
-  transition-duration: 0.4s;
-  background-color: black;
-  color: whitesmoke;
-  padding: 10px;
-  border-radius: 100%;
+#app{
+  
+  // background-color :rgba(201, 128, 128, 0.5);
+  // background-origin: border-box;
+  // height: 100%; /* You must set a specified height */
+  // width: 100%;
+  // background-position: center; /* Center the image */
+  // background-repeat: no-repeat; /* Do not repeat the image */
+  // background-size: cover; 
 }
 </style>
