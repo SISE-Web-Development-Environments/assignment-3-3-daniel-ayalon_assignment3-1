@@ -40,7 +40,7 @@
       >Login</b-button>
       <div class="mt-2">
         Do not have an account yet?
-        <router-link to="register">Register in here</router-link>
+        <router-link class="rLink" to="register"><u>Register in here</u></router-link>
       </div>
     </b-form>
     <b-alert
@@ -122,5 +122,17 @@ export default {
 <style lang="scss" scoped>
 .container {
   max-width: 400px;
+  background-color :rgba(108, 96, 110, 0.651);
+  background-origin: border-box;
+  height: 100%; /* You must set a specified height */
+  width: 100%;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; 
+
+}
+
+.rLink{
+  color: black;
 }
 </style>

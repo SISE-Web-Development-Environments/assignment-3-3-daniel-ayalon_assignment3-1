@@ -48,6 +48,13 @@ component: () => import("./pages/PersonalRecipes"),
     name: "notFound",
     component: NotFound,
   },
+
+
+  {
+    path: "/About",
+    name: "About",
+    component: ()=> import("./pages/About"),
+  }
 ];
 
 export default routes;
