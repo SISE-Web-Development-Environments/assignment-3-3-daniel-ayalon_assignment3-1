@@ -28,6 +28,7 @@ const routes = [
     component: () => import("./pages/RecipeViewPage"),
   },
   {
+<<<<<<< HEAD
     path: "/user/FavoriteRecipes",
     name: "MyFavoriteRecipes",
     component: () => import("./pages/MyFavoriteRecipes"),
@@ -44,6 +45,23 @@ const routes = [
   },
 
 
+=======
+  path: "/FavoriteRecipes",
+  name: "FavoriteRecipes",
+  component: () => import("./pages/FavoriteRecipes"),
+},
+{
+path: "/PersonalRecipes",
+name: "PersonalRecipes",
+component: () => import("./pages/PersonalRecipes"),
+},
+{
+  path: "/myFamilyRecipes",
+  name: "FamilyRecipesPage",
+  component: () => import("./pages/FamilyRecipesPage"),
+  },
+  
+>>>>>>> 2c6f1edf49a42c0b60fc0edcda31b499e4f09de9
   {
     path: "*",
     name: "notFound",

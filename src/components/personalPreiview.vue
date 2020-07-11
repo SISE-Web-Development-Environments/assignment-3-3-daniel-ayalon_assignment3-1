@@ -1,5 +1,4 @@
 <template>
-<div>
   <router-link
     :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
     class="recipe-preview"
@@ -7,30 +6,26 @@
     <div class="recipe-body">
       <img :src="recipe.image" class="recipe-image" />
     </div>
+   
+
     <div class="recipe-footer">
-      <div :title="recipe.title" class="recipe-title">
-        {{ recipe.title }}
+      <div  class="recipe-title">
+        {{ recipe.recipe_name }}
       </div>
-      
-        <div class="details">
-        <li>minutes:{{ recipe.readyInMinutes }} </li>
-        <li>likes:{{ recipe.like }} </li>
+      <!-- <ul class="recipe-overview"> -->
+        <li>minutes:{{ recipe.durationTime }} </li>
         <li> vegetarian:{{recipe.vegetarian}}  </li>
-        <li>glutenFree: {{recipe.glutenFree}} </li>
+        <li>glutenFree: {{recipe.gluten}} </li>
         <li >vegan: {{recipe.vegan}} </li>
-        <li v-if="$root.store.username">watched: {{ recipe.watched }}</li> 
-        <li v-if="$root.store.username">saved: {{ recipe.saved }}</li> 
-        </div>
-        </div>
-        </router-link>
-        <li v-if="$root.store.username">
-        <!-- <router-link :to="{name:'createFavoritePage', params: { recipeId: recipe.id,recipeTitle:recipe.title,recipeImg: recipe.image,reipeTime:recipe.readyInMinutes,recipeLike:recipe.like,recipeVeg:recipe.vegetarian,recipeGlut:recipe.glutenFree,recipeVegan:recipe.vegan  }}" class="recipe-preview" > -->
-            <button @click="addToFavorite()"> add to favorite</button>    
-        <!-- </router-link> -->
-        </li>
-      </div>
-    
-       
+        <!-- <div v-if="setCookie()">
+          <div>watched: {{ recipe.watched }}</div>
+         </div> 
+        <div v-if="setCookie()">
+          <div>saved: {{ recipe.saved }}</div>
+          </div>  -->
+      <!-- </ul> -->
+    </div>
+  </router-link>
 </template>
 
 <script>
@@ -45,7 +40,7 @@ export default {
     recipe: {
       type: Object,
       required: true
-     }
+    },
     // id: {
     //   type: Number,
     //   required: true
@@ -70,29 +65,11 @@ export default {
     //   }
     // }
   },
-  methods: {    
-       async addToFavorite(){
-          this.axios.defaults.withCredentials = true;
-      try {
-        const response = await this.axios.post(
-          "http://localhost:3000/user/FavoriteRecipes",{
-           
-          
-          recipe_id:recipe.id,
-           title:recipe.title,
-           readyInMinutes:recipe.readyInMinutes,
-           image:recipe.image,
-           aggregateLikes:recipe.like,
-           vegetarian:recipe.vegetarian,
-           glutenFree:recipe.glutenFree,
-           vegan:recipe.vegan
-          }
-        );
-        
-      } catch (error) {
-        console.log(error);
-      }
-       }
+  methods: {
+    async setCookie(){
+       return window.$cookies.isKey('session');
+       
+        }
 }
 };
 </script>
@@ -117,7 +94,7 @@ export default {
   margin-top: auto;
   margin-bottom: auto;
   display: block;
-  width: 98%;
+  width: 70%;
   height: auto;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -133,7 +110,7 @@ export default {
 .recipe-preview .recipe-footer .recipe-title {
   padding: 10px 10px;
   width: 100%;
-  font-size: 12pt;
+  font-size: 14pt;
   text-align: left;
   white-space: nowrap;
   overflow: hidden;
@@ -172,9 +149,4 @@ export default {
   display: table-cell;
   text-align: center;
 }
-.details{
-  text-align: left;
-}
-
-
 </style>

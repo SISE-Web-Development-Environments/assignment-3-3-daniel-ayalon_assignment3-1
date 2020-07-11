@@ -5,7 +5,7 @@
       <slot></slot>
     </h3>
     <b-row>
-      <b-col v-for="r in recipes" :key="r.id">
+      <b-col v-for="r in Favoriterecipes" :key="r.id">
         <RecipePreview class="recipePreview" :recipe="r" />
       </b-col>
     </b-row>
@@ -17,7 +17,7 @@
     <script>
 import RecipePreview from "../components/RecipePreview.vue";
 export default {
-  name: "MyFavoriteRecipes",
+  name: "FavoriteRecipes",
   components: {
     RecipePreview
   },
@@ -27,11 +27,11 @@ export default {
     };
   },
   mounted() {
-    this.showPPersonalRecipes();
+    this.showFavoriteRecipes();
   },
 
   methods: {
-    async showPPersonalRecipes() {
+    async showFavoriteRecipes() {
       this.axios.defaults.withCredentials = true;
       try {
         const response = await this.axios.get(
@@ -39,8 +39,8 @@ export default {
         );
         // console.log(response);
         const FavRecipes = response.data;
-        this.FavRecipes = [];
-        this.FavRecipes.push(...FavRecipes);
+        this.Favoriterecipes = [];
+        this.Favoriterecipes.push(...FavRecipes);
         // console.log(this.recipes);
       } catch (error) {
         console.log(error);

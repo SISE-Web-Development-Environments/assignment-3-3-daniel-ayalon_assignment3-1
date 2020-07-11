@@ -5,7 +5,7 @@
     </h3>
     <b-row>
       <b-col v-for="r in persRecipes" :key="r.id">
-        <RecipePreview class="recipePreview" :recipe="r" />
+        <personalPreiview class="recipePreview" :recipe="r" />
       </b-col>
     </b-row>
   </b-container>
@@ -14,11 +14,11 @@
 
 
     <script>
-import RecipePreview from "../components/RecipePreview.vue";
+import personalPreiview from "../components/personalPreiview.vue";
 export default {
   name: "PersonalRecipes",
   components: {
-    RecipePreview
+    personalPreiview
   },
   data() {
     return {
