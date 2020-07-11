@@ -9,8 +9,8 @@
           <b-nav-item to="/">Main</b-nav-item>
           <b-nav-item to="/register">Register</b-nav-item>
           <b-nav-item to="/login">Login</b-nav-item>
-          <b-nav-item to="/about" disabled>About</b-nav-item>
-          <b-nav-item to="/search" disabled>search</b-nav-item>
+          <b-nav-item to="/about" >About</b-nav-item>
+          <b-nav-item to="/search" >search</b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">

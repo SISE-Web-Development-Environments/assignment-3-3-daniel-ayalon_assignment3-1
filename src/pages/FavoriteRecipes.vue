@@ -4,22 +4,22 @@
       favorite recipes
       <slot></slot>
     </h3>
-    <b-row>
-      <b-col v-for="r in Favoriterecipes" :key="r.id">
-        <RecipePreview class="recipePreview" :recipe="r" />
-      </b-col>
-    </b-row>
+    <b-col>
+       <b-row  v-for="r in Favoriterecipes" :key="r.id">
+        <recipefavoritePreview class="recipePreview" :recipe="r" />
+      </b-row >
+    </b-col>
   </b-container>
 </template>
 
 
 
     <script>
-import RecipePreview from "../components/RecipePreview.vue";
+import recipefavoritePreview from "../components/recipefavoritePreview.vue";
 export default {
   name: "FavoriteRecipes",
   components: {
-    RecipePreview
+    recipefavoritePreview
   },
   data() {
     return {
