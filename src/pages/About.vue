@@ -13,8 +13,8 @@
 <style lang="scss" scoped>
 
 .container {
-  max-width: 400px;
-  background-color: rgba(108, 96, 110, 0.651);
+  max-width: 600px;
+  background-color: rgba(255, 255, 255, 0.651);
   background-origin: border-box;
   height: 100%; /* You must set a specified height */
   width: 100%;

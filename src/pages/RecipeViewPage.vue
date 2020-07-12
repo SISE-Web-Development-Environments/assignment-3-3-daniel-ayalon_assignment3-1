@@ -33,11 +33,7 @@
           </div>
         </div>
       </div>
-      <!-- <pre>
-      {{ $route.params }}
-      {{ recipe }}
-    </pre
-      >-->
+    
     </div>
   </div>
 </template>

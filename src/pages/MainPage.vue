@@ -1,77 +1,151 @@
 <template>
   <div class="container">
-    <div class="toCenter">
-      <h1 class="title">Main Recipes Page</h1>
-      <RecipePreviewList title="Random Recipes" class="RandomRecipes center" />
-      <br><br><br>
-      <router-link 
-        class="toLogIn"
-        v-if="!$root.store.username"
-        to="/login"
-        tag="button"
-      >Login to vue this</router-link>
-    
-    <RecipePreviewList
-      title="Last Viewed Recipes"
-      :class="{
-        RandomRecipes: true,
-        blur: !$root.store.username,
-        center: true
-      }"
-      disabled
-    ></RecipePreviewList>
-    </div>
+      <h1 class="title"><strong><b>Main Recipes</b></strong></h1>
+      <b-row>
+        <div class="mainP">
+        <b-col>
+          <div class="preview">
+            <h2 style="color:white"><strong ><B>Random Recipes</B></strong></h2>
+            <RecipePreviewList title="Random Recipes" class="RandomRecipes center" />
+          </div>
+        </b-col>
+        </div>
+        <div class="mainP">
+          <b-col>
+            <!-- <router-link
+              class="toLogIn"
+              v-if="!$root.store.username"
+              to="/login"
+              tag="button"
+            >Login to view this</router-link> -->
+            
+            <login v-if="!$root.store.username" class="log"></login>
+             <h2 style="color:white "><strong ><B>Last Watched Recipes</B></strong></h2>
+            <RecipePreviewList
+              title="Last Viewed Recipes"
+              :class="{
+                RandomRecipes: true,
+                blur: !$root.store.username,
+                center: true
+              }"
+              disabled
+            ></RecipePreviewList>
+          </b-col>
+        </div>
+      </b-row>
   </div>
 </template>
 
 <script>
+import login from "../components/login";
 import RecipePreviewList from "../components/RecipePreviewList";
 export default {
   components: {
-    RecipePreviewList
+    RecipePreviewList,
+    login
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.RandomRecipes {
-  margin: 10px 0 10px;
+.title {
+  padding-top: 50px;
+  color: whitesmoke;
+  text-align: center;
+  // margin: 1em 0 0.5em 0;
+	// color: #343434;
+	font-weight: normal;
+	font-family: 'Ultra', sans-serif;   
+	font-size: 36px;
+	line-height: 70px;
+	text-transform: uppercase;
+  text-shadow: 0px 8px  rgb(0, 0, 0), 0 0px rgb(177, 116, 25);
+  // background-color: rgb(190, 126, 180);
+  background-position:center ;
+  ;
 }
+.log{
+  margin-top: 140px;
+
+}
+// .contai/ner {
+
+// background-color: rgba(255, 255, 255, 0.0);
+//  background-image:url("../src/images/cuttingBoard.jpg");
+// height: 100%; /* You must set a specified height */
+// width: 100%;
+// // background-position: center; /* Center the image */
+// background-repeat: no-repeat; /* Do not repeat the image */
+// background-size: cover;
+// background-origin: border-box;
+// height: 100%; /* You must set a specified height */
+// width: 100%;
+// background-position: center; /* Center the image */
+// background-repeat: no-repeat; /* Do not repeat the image */
+// background-size: cover;
+// max-width: 500px;
+// text-align: center;
+// }
+// .RandomRecipes {
+// margin: 10px 0 10px;
+// }
 .blur {
-  -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
-  filter: blur(2px);
+  -webkit-filter: blur(0px); /* Safari 6.0 - 9.0 */
+  filter: blur(20px);
+  display: none;
+  
 }
+
 ::v-deep .blur .recipe-preview {
   pointer-events: none;
   cursor: default;
+  
 }
-
-.toCenter {
-  text-align: center;
+::v-deep .blur .log {
+  display: none; 
 }
+// .preview {
+//   width: 45%;
+// }
+// .right {
+//   text-align: right;
+// }
+// .left {
+//   text-align: left;
+// }
+// .toCenter {
+//   text-align: center;
+// }
 .toLogIn {
-	box-shadow: 0px 0px 0px 0px #035f66;
-	background:linear-gradient(to bottom, #0b64b3 5%, #30282d 100%);
-	background-color:#0b64b3;
+  // padding-right: 40px;
+  margin-top: 15px;
+  margin-left: 40px;;
+  box-shadow: 27px 1px 31px -1px #1c1b18;
+	background:linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
+	background-color:#eae0c2;
 	border-radius:42px;
-	border:4px solid #000000;
+	border:2px solid #ffffff;
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
-	font-family:Times New Roman;
-	font-size:19px;
+	color:#505739;
+	font-family:Georgia;
+	font-size:21px;
 	font-weight:bold;
-	padding:19px 52px;
+	padding:20px 30px;
 	text-decoration:none;
-	text-shadow:0px 0px 12px #000000;
 }
 .toLogIn:hover {
-	background:linear-gradient(to bottom, #30282d 5%, #0b64b3 100%);
-	background-color:#30282d;
+  background:linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
+	background-color:#ccc2a6;
 }
 .toLogIn:active {
-	position:relative;
-	top:1px;
+  position: relative;
+  top: 1px;
 }
 
+.mainP {
+  margin-top: 50px;
+  margin-left: 100px;
+  width: 40%;
+}
 </style>

@@ -1,54 +1,41 @@
 <template>
-<div>
-  
+  <div>
     <b-container>
-    
-    <b-col>
-    <router-link
-    
-    :to="{ name: 'recipe', params: { recipeId: recipe.recipe_id } }"
-    class="recipe-preview"
-  >
-    <b-row class="recipe-body">
-      <img :src="recipe.image" class="recipe-image" />
-    </b-row>
-    </router-link>      
-    <b-row class="recipe-footer">
-      <div id="title" >
-        {{ recipe.recipe_name }}
-      </div>
-      
-        <div class="details">
-        <li>minutes:{{ recipe.durationTime }} </li>
-        <li>likes:{{ recipe.likes }} </li>
-        <li>vegetarian:{{recipe.vegetarian}}  </li>
-        <li>glutenFree: {{recipe.gluten}} </li>
-        <li>vegan: {{recipe.vegan}} </li>     
-        </div>
-    </b-row>
-    </b-col>
-        </b-container> 
-        
+      <b-col>
+        <router-link
+          :to="{ name: 'recipe', params: { recipeId: recipe.recipe_id } }"
+          class="recipe-preview"
+        >
+          <b-row class="recipe-body">
+            <img :src="recipe.image" class="recipe-image" />
+          </b-row>
+        </router-link>
+        <b-row class="recipe-footer">
+          <div id="title">{{ recipe.recipe_name }}</div>
 
-
-      </div>
-   
-       
+          <div class="details">
+            <li>minutes:{{ recipe.durationTime }}</li>
+            <li>likes:{{ recipe.likes }}</li>
+            <li>vegetarian:{{recipe.vegetarian}}</li>
+            <li>glutenFree: {{recipe.gluten}}</li>
+            <li>vegan: {{recipe.vegan}}</li>
+          </div>
+        </b-row>
+      </b-col>
+    </b-container>
+  </div>
 </template>
 
 <script>
 export default {
- 
   data() {
-    return {
-
-    };
+    return {};
   },
   props: {
     recipe: {
       type: Object,
       required: true
-     }
+    }
     // id: {
     //   type: Number,
     //   required: true
@@ -73,9 +60,7 @@ export default {
     //   }
     // }
   },
-  methods: {    
-           
-}
+  methods: {}
 };
 </script>
 
@@ -155,14 +140,12 @@ export default {
   display: table-cell;
   text-align: center; */
 
-#title{
-    text-align: center;
-    margin-left:30%;
+#title {
+  text-align: center;
+  margin-left: 30%;
 }
-.details{
+.details {
   text-align: left;
-  margin-left:40%;
+  margin-left: 40%;
 }
-
-
 </style>

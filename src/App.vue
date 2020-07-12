@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style lang="scss">
-// @import "@/scss/form-style.scss";
+@import "@/scss/form-style.scss";
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -87,13 +87,13 @@ export default {
   height: 100%; /* You must set a specified height */
   width: 100%;
   // background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; 
+  background-repeat: repeat; /* Do not repeat the image */
+  // background-size: cover; 
 }
 
 #app{
   
-  // background-color :rgba(201, 128, 128, 0.5);
+  // background-color :rgba(255, 254, 254, 0.699);
   // background-origin: border-box;
   // height: 100%; /* You must set a specified height */
   // width: 100%;
