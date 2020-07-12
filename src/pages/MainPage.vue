@@ -11,7 +11,7 @@
         tag="button"
       >Login to vue this</router-link>
     
-    <RecipePreviewList
+    <recipeWatchedList
       title="Last Viewed Recipes"
       :class="{
         RandomRecipes: true,
@@ -19,16 +19,18 @@
         center: true
       }"
       disabled
-    ></RecipePreviewList>
+    ></recipeWatchedList>
     </div>
   </div>
 </template>
 
 <script>
 import RecipePreviewList from "../components/RecipePreviewList";
+import recipeWatchedList from "../components/recipeWatchedList";
 export default {
   components: {
-    RecipePreviewList
+    RecipePreviewList,
+    recipeWatchedList
   }
 };
 </script>

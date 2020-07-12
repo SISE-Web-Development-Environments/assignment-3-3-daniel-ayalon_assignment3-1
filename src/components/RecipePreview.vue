@@ -9,7 +9,7 @@
     </div>
      </router-link>
     <div class="recipe-footer">
-      <div :title="recipe.title" class="recipe-title">
+      <div :title="recipe.title" class="recipe-title" style="background: white;">
         {{ recipe.title }}
       </div>
       
@@ -26,8 +26,12 @@
        
         <li v-if="$root.store.username">
         <!-- <router-link :to="{name:'createFavoritePage', params: { recipeId: recipe.id,recipeTitle:recipe.title,recipeImg: recipe.image,reipeTime:recipe.readyInMinutes,recipeLike:recipe.like,recipeVeg:recipe.vegetarian,recipeGlut:recipe.glutenFree,recipeVegan:recipe.vegan  }}" class="recipe-preview" > -->
-            <button @click="addToFavorite()"> add to favorite</button>    
-        <!-- </router-link> -->
+            <span v-if="!this.isInTalbe">
+            <button @click="addToFavorite()"> add to favorite</button>
+            </span>    
+            <span v-else>
+             <button @click="removeFromFavorite()"> remove from favorite</button>    
+            </span>     
         </li>
       </div>
     
@@ -39,7 +43,8 @@ export default {
  
   data() {
     return {
-     the_recipe:this.recipe
+     the_recipe:this.recipe,
+     isInTalbe:false
     };
   },
   props: {
@@ -89,12 +94,29 @@ export default {
            recipe_id:this.the_recipe.id
         
           });
-        
+        if(respone.data.message=="The recipe already marked as favorite"){
+          this.isInTalbe=true;
+        }
       } catch (error) {
         console.log(error);
       }
-       }
+       },
+       async removeFromFavorite(){
+          this.axios.defaults.withCredentials = true;
+     
+      try {
+        const response = await this.axios.post(
+          "http://localhost:3000/user/FavoriteRecipeRemove",{         
+           
+           recipe_id:this.the_recipe.id
+        
+          });           
+      } catch (error) {
+        console.log(error);
+      }
+
 }
+  }
 };
 </script>
 
@@ -112,7 +134,7 @@ export default {
   position: relative;
 }
 
-.recipe-preview .recipe-body .recipe-image {
+.recipe-preview .recipe-body{
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;
@@ -175,7 +197,11 @@ export default {
 }
 .details{
   text-align: left;
+  background: white;
 }
-
+.recipe-image{
+  width: 300px;
+  height: auto;
+}
 
 </style>
