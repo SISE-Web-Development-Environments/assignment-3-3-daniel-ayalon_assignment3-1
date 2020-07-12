@@ -1,3 +1,4 @@
+
 <template>
   <div > 
     <b-col class="recipePre"> 
@@ -18,7 +19,13 @@
     <li>vegan: {{recipe.vegan}}</li>
     <li v-if="$root.store.username">watched: {{ recipe.watched }}</li>
     <li v-if="$root.store.username">saved: {{ recipe.saved }}</li>
-    <button v-if="$root.store.username" @click="addToFavorite()">add to favorite</button>
+    <!-- <button v-if="$root.store.username" @click="addToFavorite()">add to favorite</button> -->
+     <span v-if="!this.isInTalbe">
+            <button @click="addToFavorite()"> add to favorite</button>
+            </span>    
+            <span v-else>
+             <button @click="removeFromFavorite()"> remove from favorite</button>    
+            </span>  
   <br>
   <br>
   </b-col>
@@ -26,11 +33,13 @@
   </div>
 </template>
 
+
 <script>
 export default {
   data() {
     return {
-      the_recipe: this.recipe
+     the_recipe:this.recipe,
+     isInTalbe:false
     };
   },
   props: {
@@ -45,22 +54,40 @@ export default {
 
       try {
         const response = await this.axios.post(
-          "http://localhost:3000/user/FavoriteRecipes",
-          {
-            title: this.the_recipe.title,
-            readyInMinutes: this.the_recipe.readyInMinutes,
-            image: this.the_recipe.image,
-            aggregateLikes: this.the_recipe.like,
-            vegetarian: this.the_recipe.vegetarian,
-            glutenFree: this.the_recipe.glutenFree,
-            vegan: this.the_recipe.vegan,
-            recipe_id: this.the_recipe.id
-          }
-        );
+          "http://localhost:3000/user/FavoriteRecipes",{
+         
+           title:this.the_recipe.title,
+           readyInMinutes:this.the_recipe.readyInMinutes,
+           image:this.the_recipe.image,
+           aggregateLikes:this.the_recipe.like,
+           vegetarian:this.the_recipe.vegetarian,
+           glutenFree:this.the_recipe.glutenFree,
+           vegan:this.the_recipe.vegan,
+           recipe_id:this.the_recipe.id
+        
+          });
+        if(respone.data.message=="The recipe already marked as favorite"){
+          this.isInTalbe=true;
+        }
       } catch (error) {
         console.log(error);
       }
-    }
+       },
+       async removeFromFavorite(){
+          this.axios.defaults.withCredentials = true;
+     
+      try {
+        const response = await this.axios.post(
+          "http://localhost:3000/user/FavoriteRecipeRemove",{         
+           
+           recipe_id:this.the_recipe.id
+        
+          });           
+      } catch (error) {
+        console.log(error);
+      }
+
+}
   }
 };
 </script>
@@ -97,7 +124,7 @@ export default {
   position: relative;
 }
 
-.recipe-preview .recipe-body .recipe-image {
+.recipe-preview .recipe-body{
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;

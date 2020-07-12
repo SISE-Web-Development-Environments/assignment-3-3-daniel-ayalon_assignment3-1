@@ -69,6 +69,7 @@ Vue.use(VueAxios, axios);
 Vue.config.productionTip = false;
 
 const shared_data = {
+   globalRecipes:[],
   username: localStorage.username,
   login(username) {
     localStorage.setItem("username", username);
@@ -81,6 +82,7 @@ const shared_data = {
     this.username = undefined;
   },
 };
+
 console.log(shared_data);
 // Vue.prototype.$root.store = shared_data;
 
@@ -89,7 +91,10 @@ new Vue({
   data() {
     return {
       store: shared_data,
+     
     };
+  },created: function(){
+    this.$root.store.allRecipes=[]
   },
   methods: {
     toast(title, content, variant = null, append = false) {

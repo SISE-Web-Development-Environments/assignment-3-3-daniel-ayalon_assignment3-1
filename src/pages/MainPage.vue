@@ -21,7 +21,7 @@
             
             <login v-if="!$root.store.username" class="log"></login>
              <h2 style="color:white "><strong ><B>Last Watched Recipes</B></strong></h2>
-            <RecipePreviewList
+            <recipeWatchedList
               title="Last Viewed Recipes"
               :class="{
                 RandomRecipes: true,
@@ -29,7 +29,7 @@
                 center: true
               }"
               disabled
-            ></RecipePreviewList>
+            ></recipeWatchedList>
           </b-col>
         </div>
       </b-row>
@@ -39,10 +39,12 @@
 <script>
 import login from "../components/login";
 import RecipePreviewList from "../components/RecipePreviewList";
+import recipeWatchedList from "../components/recipeWatchedList";
 export default {
   components: {
     RecipePreviewList,
-    login
+    login,
+    recipeWatchedList
   }
 };
 </script>
