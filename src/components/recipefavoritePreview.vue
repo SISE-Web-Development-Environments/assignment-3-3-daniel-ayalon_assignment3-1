@@ -87,7 +87,7 @@ export default {
          
        
         this.$root.store.isInTalbe=false;   
-        this.$root.$emit('favoritePage')     
+         this.$root.$emit('favoritePage')     
       } catch (error) {
         console.log(error);
       }

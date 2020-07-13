@@ -32,8 +32,11 @@ export default {
   },
   mounted() {
     this.showFavoriteRecipes();
+     this.$root.$on('favoritePage',()=>
+     {
+      this.showFavoriteRecipes();
+    });
     
-
   },
 
   methods: {
