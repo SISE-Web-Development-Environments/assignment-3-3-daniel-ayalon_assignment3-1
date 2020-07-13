@@ -1,34 +1,35 @@
 <template>
   <div class="container">
-    <div v-if="recipe">
+  
+    <div v-if="recipe" class="recipe-body">
       <div class="recipe-header mt-3 mb-4">
         <img :src="recipe.image" class="center" />
       </div>
-      <div class="recipe-body">
+      <div >
         <div class="wrapper">
           <div class="wrapped">
             <div class="mb-3">
               <li>
                 <b>
-                  <u>Recipe name:</u>
+                  <u class="details">Recipe name:</u>
                 </b>
                 {{ recipe.recipeName }}
               </li>
               <li>
                 <b>
-                  <u>aouther:</u>
+                  <u class="details">aouther:</u>
                 </b>
                 {{ recipe.aouther }}
               </li>
               <li>
                 <b>
-                  <u>vegetarian:</u>
+                  <u class="details">vegetarian:</u>
                 </b>
                 {{ recipe.vegetarian }}
               </li>
               <li>
                 <b>
-                  <u>Time that used:</u>
+                  <u class="details">Time that used:</u>
                 </b>
                 {{ recipe.timeThatUsed }}
               </li>
@@ -63,7 +64,23 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+.details{
+   padding-top: 50px;
+  color: black;
+  text-align: center;
+	font-weight: normal;
+	font-family: 'Ultra', sans-serif;   
+	font-size: 20px;
+	line-height: 70px;
+	text-transform: uppercase;
+  // text-shadow: 0px 8px  rgb(0, 0, 0), 0 0px rgb(177, 116, 25);
+  background-position:center ;
+}
+.recipe-body{
+  background-color: rgba(200,200,200,0.5);
+}
 .wrapper {
   display: flex;
 }

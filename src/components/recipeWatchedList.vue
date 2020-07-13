@@ -1,20 +1,14 @@
 <template>
- <div>
-  <b-container>
-    <h3>
-      {{ title }}:
-      <slot></slot>
-    </h3>
-    <b-row>
-      <b-col v-for="r in recipes" :key="r.id">
-        <RecipePreview class="recipePreview" :recipe="r" />
+  <div>
+    
+      <b-col class="container">
+        <b-row v-for="r in recipes" :key="r.id">
+          <div>
+            <RecipePreview class="recipePreview" :recipe="r" />
+          </div>
+        </b-row>
       </b-col>
-    </b-row>
-  </b-container>
-  <br>
-  <br>
-  
- 
+    
   </div>
 </template>
 
@@ -48,8 +42,8 @@ export default {
         );
 
         // console.log(response);
-        
-         const Watchedrecipes = response.data;
+
+        const Watchedrecipes = response.data;
         //console.log(response.data)
         this.recipes = [];
         this.recipes.push(...Watchedrecipes);
@@ -57,13 +51,14 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }  
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .container {
-  min-height: 400px;
+  // min-height: 400px;
+  margin-top: 76px;
 }
 </style>

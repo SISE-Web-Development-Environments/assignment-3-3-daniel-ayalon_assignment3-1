@@ -1,45 +1,124 @@
 
 <template>
-  <div > 
-    <b-col class="recipePre"> 
-      
-     <div :title="recipe.title" class="recipe-title">
-      <strong>
-        <u>{{ recipe.title }}</u>
-      </strong>
-    </div>
-    <router-link :to="{ name: 'recipe', params: { recipeId: recipe.id } }" class="recipe-preview">
-      <img :src="recipe.image" class="recipe-image" />
-    </router-link>
-    
-    <li>minutes:{{ recipe.readyInMinutes }}</li>
-    <img src="../images/likes.png" alt="Likes:" class="img"> {{ recipe.like }}
-    <li>vegetarian:{{recipe.vegetarian}}</li>
-    <li>glutenFree: {{recipe.glutenFree}}</li>
-    <li>vegan: {{recipe.vegan}}</li>
-    <li v-if="$root.store.username">watched: {{ recipe.watched }}</li>
-    <li v-if="$root.store.username">saved: {{ recipe.saved }}</li>
-    <!-- <button v-if="$root.store.username" @click="addToFavorite()">add to favorite</button> -->
-     <span v-if="!this.isInTalbe">
-            <button @click="addToFavorite()"> add to favorite</button>
-            </span>    
-            <span v-else>
-             <button @click="removeFromFavorite()"> remove from favorite</button>    
-            </span>  
-  <br>
-  <br>
-  </b-col>
-  <br><br>
+  <div class="container">
+    <b-col class="recipePre">
+      <div style="text-align:center;">
+        <div :title="recipe.title" class="recipe-title">
+          <strong>{{ recipe.title }}</strong>
+        </div>
+        <div class="container-image">
+        <router-link
+          :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
+          class="recipe-preview"
+        >
+          <img :src="recipe.image" class="recipe-image" />
+          <div class="overlay">
+            <div class="image-text">click to see all recipe inforamtion</div>
+          </div>
+        </router-link>
+        </div>
+      </div>
+      <b-row>
+        <b-col>
+          <li>
+            <b-row>
+              <img src="../images/clock.png" alt="Likes:" class="img" />
+
+              <span class="time">{{ recipe.readyInMinutes }}min</span>
+            </b-row>
+          </li>
+          <li>
+            <b-row>
+              <img src="../images/likes.png" alt="Likes:" class="img" />
+
+              <span class="like">{{ recipe.like }}</span>
+            </b-row>
+          </li>
+
+          <li>
+            <b-row>
+              <span v-if="recipe.vegetarian">
+                <img src="../images/marked2.png" alt="vegeterian:" class="img" />
+              </span>
+              <span v-if="!recipe.vegetarian">
+                <img src="../images/Xbox.png" alt="vegeterian:" class="img" />
+              </span>
+              <span class="vegeterian">vegetarian</span>
+            </b-row>
+          </li>
+          <li>
+            <b-row>
+              <span v-if="recipe.vegan">
+                <img src="../images/marked2.png" alt="vegan:" class="img" />
+              </span>
+              <span v-if="!recipe.vegan">
+                <img src="../images/Xbox.png" alt="vegan:" class="img" />
+              </span>
+              <span class="vegeterian">vegan</span>
+            </b-row>
+          </li>
+        </b-col>
+        <b-col>
+          <li>
+            <b-row>
+              <span v-if="recipe.glutenFree">
+                <img src="../images/marked2.png" alt="glutenFree:" class="img" />
+              </span>
+              <span v-if="!recipe.glutenFree">
+                <img src="../images/Xbox.png" alt="glutenFree:" class="img" />
+              </span>
+              <span class="vegeterian">Gluten Free</span>
+            </b-row>
+          </li>
+          <li v-if="$root.store.username">
+            <b-row>
+              <span v-if="recipe.watched">
+                <img src="../images/marked2.png" alt="watched:" class="img" />
+              </span>
+              <span v-if="!recipe.watched">
+                <img src="../images/Xbox.png" alt="watched:" class="img" />
+              </span>
+              <span class="vegeterian">watched</span>
+            </b-row>
+          </li>
+          <li v-if="$root.store.username">
+            <b-row>
+              <span v-if="recipe.saved">
+                <img src="../images/marked2.png" alt="saved:" class="img" />
+              </span>
+              <span v-if="!recipe.saved">
+                <img src="../images/Xbox.png" alt="saved:" class="img" />
+              </span>
+              <span class="vegeterian">saved</span>
+            </b-row>
+          </li>
+        </b-col>
+      </b-row>
+
+      <b-row class="btn">
+        <b-col>
+          <div v-if="!this.isInTalbe">
+            <button @click="addToFavorite()" class="favBtn">add to favorite</button>
+          </div>
+        </b-col>
+        <b-col>
+          <div v-if="this.isInTalbe">
+            <button @click="removeFromFavorite()" class="favBtn">remove from favorite</button>
+          </div>
+        </b-col>
+      </b-row>
+    </b-col>
   </div>
 </template>
 
 
-<script>
+<script >
 export default {
   data() {
     return {
-     the_recipe:this.recipe,
-     isInTalbe:false
+      checkbox: false,
+      the_recipe: this.recipe,
+      isInTalbe: false
     };
   },
   props: {
@@ -54,138 +133,134 @@ export default {
 
       try {
         const response = await this.axios.post(
-          "http://localhost:3000/user/FavoriteRecipes",{
-         
-           title:this.the_recipe.title,
-           readyInMinutes:this.the_recipe.readyInMinutes,
-           image:this.the_recipe.image,
-           aggregateLikes:this.the_recipe.like,
-           vegetarian:this.the_recipe.vegetarian,
-           glutenFree:this.the_recipe.glutenFree,
-           vegan:this.the_recipe.vegan,
-           recipe_id:this.the_recipe.id
-        
-          });
-        if(respone.data.message=="The recipe already marked as favorite"){
-          this.isInTalbe=true;
+          "http://localhost:3000/user/FavoriteRecipes",
+          {
+            title: this.the_recipe.title,
+            readyInMinutes: this.the_recipe.readyInMinutes,
+            image: this.the_recipe.image,
+            aggregateLikes: this.the_recipe.like,
+            vegetarian: this.the_recipe.vegetarian,
+            glutenFree: this.the_recipe.glutenFree,
+            vegan: this.the_recipe.vegan,
+            recipe_id: this.the_recipe.id,
+            watched: this.the_recipe.watched,
+            saved: true
+          }
+        );
+        if (respone.data.message == "The recipe already marked as favorite") {
+          this.isInTalbe = true;
         }
       } catch (error) {
         console.log(error);
       }
-       },
-       async removeFromFavorite(){
-          this.axios.defaults.withCredentials = true;
-     
+    },
+    async removeFromFavorite() {
+      this.axios.defaults.withCredentials = true;
+
       try {
         const response = await this.axios.post(
-          "http://localhost:3000/user/FavoriteRecipeRemove",{         
-           
-           recipe_id:this.the_recipe.id
-        
-          });           
+          "http://localhost:3000/user/FavoriteRecipeRemove",
+          {
+            recipe_id: this.the_recipe.id
+          }
+        );
       } catch (error) {
         console.log(error);
       }
-
-}
+    }
   }
 };
 </script>
 
 <style scoped>
+.container {
+  /* text-align: center; */
+  width: 400px;
+}
+.watched {
+  margin-top: 20px;
+}
 .recipe-image {
-  width: 200px;
+  margin-bottom: 15px;
+  width: 330px;
   height: auto;
+  text-align: center;
 }
-.recipePre{
-  margin-top: 50px;
-  background-size:100% ;
-  height: 400px;
-  background-color: rgba(255, 254, 254, 0.849);
+.recipe-title {
+  color: #2c3a50;
+  font-size: 25px;
+  font-family: "Libre Baskerville", serif;
+  line-height: 30px;
+  text-align: center;
+  text-shadow: 1px 1px 1px rgb(0, 0, 0);
 }
-.recipe-title{
-  width: 300px;
-  
-}
-.img{
-  width: 20px;
-  height: 20px;
-}
-/* .recipe-preview {
-  display: inline-block;
-  width: 90%;
-  height: 100%;
-  position: relative;
-  margin: 10px 10px;
-}
-.recipe-preview > .recipe-body {
-  width: 100%;
-  height: 200px;
-  position: relative;
+.recipePre {
+  margin-top: 70px;
+  /* background-size: 20%; */
+  height: 570px;
+  background-color: rgb(214, 214, 214);
 }
 
-.recipe-preview .recipe-body{
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
-  display: block;
-  width: 200px;
-  height: auto;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-} */
-
-.recipe-preview .recipe-footer {
-  /* width: 100%;
-  height: 50%;
-  overflow: hidden; */
+.img {
+  margin-left: 18px;
+  margin-right: 6px;
+  width: 25px;
+  height: 25px;
+}
+li {
+  margin-bottom: 10px;
+  list-style-type: none;
 }
 
-.recipe-preview .recipe-footer .recipe-title {
-  /* padding: 10px 10px;
-  width: 100%;
-  font-size: 12pt;
-  text-align: left;
-  white-space: nowrap;
+.overlay {
+  position: absolute;
+  top: 90px;
+  left: 20px;
+  right: 9px;
+  opacity: 0.8;
+  background-color: #008cba;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis; */
+  width: 89.5%;
+  height: 0;
+  transition: 0.8s ease;
 }
 
-.recipe-preview .recipe-footer ul.recipe-overview {
-  /* padding: 5px 10px;
-  width: 100%;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  -o-box-flex: 1;
-  box-flex: 1;
-  -webkit-flex: 1 auto;
-  -ms-flex: 1 auto;
-  flex: 1 auto;
-  table-layout: fixed;
-  margin-bottom: 0px; */
+.container-image:hover .overlay {
+  height: 150px;
 }
-
-.recipe-preview .recipe-footer ul.recipe-overview li {
-  /* -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  -o-box-flex: 1;
-  -ms-box-flex: 1;
-  box-flex: 1;
-  -webkit-flex-grow: 1;
-  flex-grow: 1;
-  width: 90px;
-  display: table-cell;
-  text-align: center; */
+.image-text {
+  white-space: nowrap;
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }
-/* .details {
-  text-align: left;
-} */
+.favBtn {
+  box-shadow: 15px 15px 15px 15px #1c1b18;
+  background: linear-gradient(to bottom, #887f63 5%, #fff4d4 100%);
+  background-color: #eae0c2;
+  border-radius: 10px;
+  border: 2px solid #000000;
+  display: inline-block;
+  cursor: pointer;
+  color: #505739;
+  font-family: Georgia;
+  font-size: 16px;
+  font-weight: bold;
+  font-weight: bold;
+  padding: 18px 4px;
+  text-decoration: none;
+}
+.favBtn:hover {
+  background: linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
+  background-color: #ccc2a6;
+}
+.favBtn:active {
+  position: relative;
+  top: 1px;
+}
 </style>

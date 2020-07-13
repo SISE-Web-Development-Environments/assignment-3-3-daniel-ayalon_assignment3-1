@@ -11,16 +11,9 @@
         </b-col>
         </div>
         <div class="mainP">
-          <b-col>
-            <!-- <router-link
-              class="toLogIn"
-              v-if="!$root.store.username"
-              to="/login"
-              tag="button"
-            >Login to view this</router-link> -->
-            
+          <b-col>      
             <login v-if="!$root.store.username" class="log"></login>
-             <h2 style="color:white "><strong ><B>Last Watched Recipes</B></strong></h2>
+             <h2 v-if="$root.store.username" style="color:white "><strong ><B>Last Watched Recipes</B></strong></h2>
             <recipeWatchedList
               title="Last Viewed Recipes"
               :class="{
@@ -53,44 +46,21 @@ export default {
 .title {
   padding-top: 50px;
   color: whitesmoke;
-  text-align: center;
-  // margin: 1em 0 0.5em 0;
-	// color: #343434;
+  // text-align: center;
 	font-weight: normal;
 	font-family: 'Ultra', sans-serif;   
 	font-size: 36px;
 	line-height: 70px;
 	text-transform: uppercase;
   text-shadow: 0px 8px  rgb(0, 0, 0), 0 0px rgb(177, 116, 25);
-  // background-color: rgb(190, 126, 180);
   background-position:center ;
-  ;
+  
 }
 .log{
-  margin-top: 140px;
+  margin-top: 180px;
 
 }
-// .contai/ner {
 
-// background-color: rgba(255, 255, 255, 0.0);
-//  background-image:url("../src/images/cuttingBoard.jpg");
-// height: 100%; /* You must set a specified height */
-// width: 100%;
-// // background-position: center; /* Center the image */
-// background-repeat: no-repeat; /* Do not repeat the image */
-// background-size: cover;
-// background-origin: border-box;
-// height: 100%; /* You must set a specified height */
-// width: 100%;
-// background-position: center; /* Center the image */
-// background-repeat: no-repeat; /* Do not repeat the image */
-// background-size: cover;
-// max-width: 500px;
-// text-align: center;
-// }
-// .RandomRecipes {
-// margin: 10px 0 10px;
-// }
 .blur {
   -webkit-filter: blur(0px); /* Safari 6.0 - 9.0 */
   filter: blur(20px);
@@ -106,20 +76,8 @@ export default {
 ::v-deep .blur .log {
   display: none; 
 }
-// .preview {
-//   width: 45%;
-// }
-// .right {
-//   text-align: right;
-// }
-// .left {
-//   text-align: left;
-// }
-// .toCenter {
-//   text-align: center;
-// }
+
 .toLogIn {
-  // padding-right: 40px;
   margin-top: 15px;
   margin-left: 40px;;
   box-shadow: 27px 1px 31px -1px #1c1b18;
@@ -146,8 +104,15 @@ export default {
 }
 
 .mainP {
-  margin-top: 50px;
-  margin-left: 100px;
+  margin-top: 70px;
+  text-align: center;  
   width: 40%;
+}
+.container{
+  text-align: center;
+  
+}
+.RandomRecipes center{
+  margin-left: 50px;
 }
 </style>

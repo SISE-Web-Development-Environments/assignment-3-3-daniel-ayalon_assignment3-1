@@ -1,63 +1,64 @@
 <template>
-    <div>
-    <h1>Search recipes</h1>
-    <label for="serach">Enter Search name</label>
-    <input type="text" name="serach" id="serach" v-model="searching.NameOfFood" /><br>
-    <label for="recipesNumber">Please enter number of recipes</label>
-    <!-- <select name="recipesNumber" id="recipesNumber" v-model="searching.NumberOfRecipes">
-         <option value="5">5</option>
-         <option value="10">10</option>
-         <option value="15">15</option>
-   </select> -->
-    <br>
-    
-     <b-form-group id="recipesNumber" label-cols-sm="7" label="Please enter number of recipes:" label-for="recipesNumber"> 
-    <b-form-select name="recipesNumber" id="recipesNumber" v-model="searching.numberOfRecipes" :options="recipesNum">      
-   </b-form-select>
-   </b-form-group> 
-    
-    
-    
-    
-     <b-form-group id="group_by_cuisine" label-cols-sm="7" label="Choose by cuisine:" label-for="chooseCuisine"> 
-    <b-form-select name="chooseCuisine" id="chooseCuisine" v-model="select_cuisine" :options="cuisine">      
-   </b-form-select>
-   </b-form-group> 
-    
-    <br>
-    
-     <b-form-group id="group_by_diet" label-cols-sm="7" label="Choose by diet:" label-for="choosediet"> 
-    <b-form-select name="choosediet" id="choosediet" v-model="select_diet" :options="diet">        
-   </b-form-select>
-   </b-form-group>
-   
-   <br> 
+  <div class="container" id="container">
+  <div class="back">
+    <h1 class="title"><strong><b>Search recipes</b></strong></h1>
+    <b-form-group class="group" id="searchName" label-for="recipesNumber">
+      <b-form-input
+        placeholder="Enter recipe name you want to search"
+        name="searchName"
+        id="searchName"
+        v-model="searching.NameOfFood"
+      ></b-form-input>
+    </b-form-group>
+    <br />
 
-   <b-form-group id="group_by_intolarence" label-cols-sm="7" label="choose by intolarence:" label-for="chooseintolarence"> 
-    <b-form-select name="chooseintolarence" id="chooseintolarence" v-model="select_intolarence" :options="intolarence">        
-   </b-form-select>
-   </b-form-group>
-   <br>
-   <button @click="sortByTime()">sort by time</button><br>
-   <button @click="sortBylikes()">sort by likes</button>
-    <br>
-    <button @click="search1()">search</button>
-    <b-container>
-       <span v-for="r in recipes" :key="r.id">
-        <RecipePreview class="recipePreview" :recipe="r" />
+    <h5 ><b>choose number of recipes you want to get back</b></h5>
+    <b-form-group class="group" id="recipesNumber" label-for="recipesNumber">
+      <b-form-select
+        name="recipesNumber"
+        id="recipesNumber"
+        v-model="searching.numberOfRecipes"
+        :options="recipesNum"
+      ></b-form-select>
+    </b-form-group>
+
+    <b-form-group class="group" id="group_by_cuisine" label-for="chooseCuisine">
+      <b-form-select
+        name="chooseCuisine"
+        id="chooseCuisine"
+        v-model="select_cuisine"
+        :options="cuisine"
+      ></b-form-select>
+    </b-form-group>
+
+    <b-form-group class="group" id="group_by_diet" label-for="choosediet">
+      <b-form-select name="choosediet" id="choosediet" v-model="select_diet" :options="diet"></b-form-select>
+    </b-form-group>
+    <b-form-group class="group" id="group_by_intolarence" label-for="chooseintolarence">
+      <b-form-select
+        name="chooseintolarence"
+        id="chooseintolarence"
+        v-model="select_intolarence"
+        :options="intolarence"
+      ></b-form-select>
+    </b-form-group>
+    <br />
+    <button @click="sortByTime()" class="btn">sort by time</button>
+    <br /><br>
+    <button @click="sortBylikes()" class="btn">sort by likes</button>
+    <br /><br>
+
+    <button @click="search1()" class="btn">search</button><br><br>
+  </div>
+    <b-col>
+      <span v-for="r in recipes" :key="r.id" style="margin-left: 50px;">
+        <b-row>
+          <RecipePreview class="recipePreview" :recipe="r" />
+        </b-row>
       </span>
-  </b-container>
- <b-alert    
-      v-if="!checkIfOk()"
-      variant="warning"
-      dismissible
-      show
-    >no recipes found</b-alert>
-
-    
-
-
-    </div>           
+    </b-col>
+    <b-alert v-if="!checkIfOk()" variant="warning" dismissible show>no recipes found</b-alert>
+  </div>
 </template>
 <script>
 import cuisine from "../assets/cuisine";
@@ -65,128 +66,161 @@ import diet from "../assets/diet";
 import intolarence from "../assets/intolarence";
 import RecipePreview from "../components/RecipePreview.vue";
 export default {
-  name:"search",
+  name: "search",
   components: {
     RecipePreview
-    },
-    data(){
-        return{
-            searching:{
-               NameOfFood:null,
-               numberOfRecipes:5
-            
-            },
-             recipesNum:[5,10,15],
-             select_cuisine: null,
-             cuisine: [{ value: null, text: "", }],
-             select_diet:null,
-             diet:[{ value: null, text: "",  }],
-             select_intolarence:null,
-             intolarence:[{ value: null, text: "",  }],
-             recipes:[],
-             isBeenSearched:false,
-             
-             
-        }
-    },
-     mounted() {
+  },
+  data() {
+    return {
+      searching: {
+        NameOfFood: null,
+        numberOfRecipes: 5
+      },
+      recipesNum: [5, 10, 15],
+      select_cuisine: null,
+      cuisine: [{ value: null, text: "cooshe recipe cusine.." }],
+      select_diet: null,
+      diet: [{ value: null, text: "choose diet type.." }],
+      select_intolarence: null,
+      intolarence: [{ value: null, text: "choos intolarence you don't like.." }],
+      recipes: [],
+      isBeenSearched: false
+    };
+  },
+  mounted() {
     // console.log("mounted");
     this.cuisine.push(...cuisine);
     this.diet.push(...diet);
     this.intolarence.push(...intolarence);
     // console.log($v);
-    
-    this.lastSearch();
-    
-  },
-   methods:{
-            async search1(){
-                try{
-               
-                this.axios.defaults.withCredentials = true;
-                this.isBeenSearched=false;
-                let searchParams={};
-                if(this.select_cuisine!=null){
-                    searchParams["cuisine"]=this.select_cuisine;
-                } 
-                if(this.select_diet!=null){
-                    searchParams["diet"]=this.select_diet;
-                } 
-                if(this.select_intolarence!=null){
-                    searchParams["intolerance"]=this.select_intolarence;
-                } 
-                
-                 console.log(searchParams.query);
-                 let response = await this.axios.get(
-                    `http://localhost:3000/recipes/search/query/${this.searching.NameOfFood}/amount/${this.searching.numberOfRecipes}`, {
-                        
-                        params:searchParams
-                    }
-               );
-               console.log(response);
 
-                // console.log(this.searching.numberOfRecipes)
-                 const found_recipes=response.data;                 
-                 this.recipes=[];
-                 this.recipes.push(...found_recipes)
-                                             
-                //  isFirstTime=false;
-                //  this.$root.store.allRecipes=[]
-                //  var stoargeRecipes=this.$root.store.allRecipes
-                
-                    
-                        if(this.$root.store.username){
-                             this.$root.store.globalRecipes=[];
-                             this.$root.store.globalRecipes.push(...this.recipes)
-                        }
-                 if(this.recipes.length>0){
-                    this.isBeenSearched=true;
-                 }
-                  } catch (error) {
-                    console.log(error);
-                  }
-                       //  for( i;i<recipesSize;i++){
-                //      for(j;i<stoargeSize;j++)
-                //         if(stoargeRecipes[j]===recipes[i]){
-                //             break;
-                //      }
-                //     else if(j==stoargeRecipes.length-1&&stoargeRecipes[j]!==recipes[i]){
-                //         stoargeRecipes.push(recipes[i]);
-                //       }                   
-                //     }
-        },
-        sortByTime(){
-           return this.recipes.sort((a,b)=>a.readyInMinutes-b.readyInMinutes); 
-        },
-        sortBylikes(){
-            return this.recipes.sort((a,b)=>b.like-a.like);
-        
-        },
-        checkIfOk(){
-        if(this.recipes.length==0 && this.isBeenSearched==true){
-               return false; 
-        } 
-        else if(this.isBeenSearched==true){
-            return true;
-        } 
-        },
-        lastSearch(){
-           if(this.$root.store.username){
-            if(this.$root.store.globalRecipes!==undefined){
-           this.recipes=this.$root.store.globalRecipes    
-              }
-           }
-        }       
+    this.lastSearch();
+  },
+  methods: {
+    async search1() {
+      try {
+        this.axios.defaults.withCredentials = true;
+        this.isBeenSearched = false;
+        let searchParams = {};
+        if (this.select_cuisine != null) {
+          searchParams["cuisine"] = this.select_cuisine;
+        }
+        if (this.select_diet != null) {
+          searchParams["diet"] = this.select_diet;
+        }
+        if (this.select_intolarence != null) {
+          searchParams["intolerance"] = this.select_intolarence;
+        }
+
+        console.log(searchParams.query);
+        let response = await this.axios.get(
+          `http://localhost:3000/recipes/search/query/${this.searching.NameOfFood}/amount/${this.searching.numberOfRecipes}`,
+          {
+            params: searchParams
+          }
+        );
+        console.log(response);
+
+        // console.log(this.searching.numberOfRecipes)
+        const found_recipes = response.data;
+        this.recipes = [];
+        this.recipes.push(...found_recipes);
+
+        if (this.$root.store.username) {
+          this.$root.store.globalRecipes = [];
+          this.$root.store.globalRecipes.push(...this.recipes);
+        }
+        if (this.recipes.length > 0) {
+          this.isBeenSearched = true;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    sortByTime() {
+      return this.recipes.sort((a, b) => a.readyInMinutes - b.readyInMinutes);
+    },
+    sortBylikes() {
+      return this.recipes.sort((a, b) => b.like - a.like);
+    },
+    checkIfOk() {
+      if (this.recipes.length == 0 && this.isBeenSearched == true) {
+        return false;
+      } else if (this.isBeenSearched == true) {
+        return true;
+      }
+    },
+    lastSearch() {
+      if (this.$root.store.username) {
+        if (this.$root.store.globalRecipes !== undefined) {
+          this.recipes = this.$root.store.globalRecipes;
+        }
+      }
     }
+  }
 };
 </script>
-<style>
-.recipePreview{
-    display: inline-block;
+<style lang="scss" scoped>
+h5{
+  
+  text-align: center;
+ 
+	font-size: 22px;
+	
 }
-
-b-container{
-    height: 100%;
-    width: 100%;
+.title {
+  padding-top: 50px;
+  color: whitesmoke;
+  text-align: center;
+	font-weight: normal;
+	font-family: 'Ultra', sans-serif;   
+	font-size: 45px;
+	line-height: 80px;
+	text-transform: uppercase;
+  text-shadow: 0px 8px 4px  rgb(0, 0, 0), 0 10px rgb(177, 116, 25);
+  background-position:center ;
+  
+}
+.back{
+    background-color :rgba(255, 255, 255, 0.6);
+}
+.group{
+    width: 400px;
+    margin-left: 40px;
+    text-align: center;
+}
+.container {
+   max-width: 500px;
+//    background-color :rgba(255, 255, 255, 0.651);
+  background-origin: border-box;
+  height: 150%; /* You must set a specified height */
+  width: 100%;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; 
+  text-align: center; 
+}
+.btn {
+  box-shadow: 7px 7px 7px 7px #1c1b18;
+	background:linear-gradient(to bottom, #887f63 5%, #fff4d4 100%);
+	background-color:#eae0c2;
+	border-radius:10px;
+	border:2px solid #000000;
+	display:inline-block;
+	cursor:pointer;
+	color:#505739;
+	font-family:Georgia;
+	font-size:16px;
+	font-weight:bold;
+  padding: 5px 3px;
+  text-decoration: none;
+}
+.btn:hover {
+  background: linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
+  background-color: #ccc2a6;
+}
+.btn:active {
+  position: relative;
+  top: 1px;
 }
 </style>

@@ -1,13 +1,22 @@
 <template>
   <b-container>
-    <h3>
+    <h1 class="title"><b><strong>
       favorite recipes
-      <slot></slot>
-    </h3>
+      <slot></slot></strong></b>
+    </h1>
     <b-col>
-       <b-row  v-for="r in Favoriterecipes" :key="r.id">
-        <recipefavoritePreview class="recipePreview" :recipe="r" />
-      </b-row >
+      <b-row v-for="r in Favoriterecipes" :key="r.id">
+        <RecipePreview
+          title="Last Viewed Recipes"
+          :class="{
+                RandomRecipes: true,
+                blur: !$root.store.username,
+                center: true
+              }"
+          class="recipePreview"
+          :recipe="r"
+        />
+      </b-row>
     </b-col>
   </b-container>
 </template>
@@ -15,15 +24,21 @@
 
 
     <script>
-import recipefavoritePreview from "../components/recipefavoritePreview.vue";
+import RecipePreview from "../components/RecipePreview.vue";
 export default {
   name: "FavoriteRecipes",
   components: {
-    recipefavoritePreview
+    RecipePreview
   },
+  //  props: {
+  //   // title: {
+  //   //   type: String,
+  //   //   required: true
+  //   // }
+  // },
   data() {
     return {
-      Favoriterecipes: null
+      Favoriterecipes: []
     };
   },
   mounted() {
@@ -37,11 +52,9 @@ export default {
         const response = await this.axios.get(
           "http://localhost:3000/user/FavoriteRecipes"
         );
-        // console.log(response);
         const FavRecipes = response.data;
         this.Favoriterecipes = [];
         this.Favoriterecipes.push(...FavRecipes);
-        // console.log(this.recipes);
       } catch (error) {
         console.log(error);
       }
@@ -50,15 +63,16 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.RandomRecipes {
-  margin: 10px 0 10px;
-}
-.blur {
-  -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
-  filter: blur(2px);
-}
-::v-deep .blur .recipe-preview {
-  pointer-events: none;
-  cursor: default;
+.title {
+   padding-top: 50px;
+  color: whitesmoke;
+  text-align: center;
+	font-weight: normal;
+	font-family: 'Ultra', sans-serif;   
+	font-size: 36px;
+	line-height: 70px;
+	text-transform: uppercase;
+  text-shadow: 0px 8px  rgb(0, 0, 0), 0 0px rgb(177, 116, 25);
+  background-position:center ;
 }
 </style>

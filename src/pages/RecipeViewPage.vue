@@ -81,26 +81,7 @@ export default {
 
       let _instructions = analyzedInstructions;
 
-      // .map((fstep) => {
-      //   // if(analyzedInstructions!== undefined){
-      //   //   console.log("aInst");
-      //   //   console.log(response.data.analyzedInstructions);
-      //   //   console.log("titele:");
-      //   //   console.log(response.data.title);
-      //   //    console.log("i am empty");
-      //   // }
-      //   console.log("fstep");
-      //   console.log(fstep);
-      //   console.log("fstep.steps");
-      //   console.log(fstep.steps);
-      //   console.log("fstep.steps[0]");
-      //   console.log(fstep.steps[0]);
-      //   console.log("all good");
-      //   fstep.steps[0].step = fstep.name + fstep.steps[0].step;
-      //   return fstep.steps;
-      // })
-      // .reduce((a, b) => [...a, ...b], []);
-
+ 
       let _recipe = {
         instructions,
         _instructions,
@@ -123,20 +104,28 @@ export default {
 };
 </script>
 
-<style scoped>
-.wrapper {
+<style lang="scss" scoped>
+/* .wrapper {
   display: flex;
-}
+} */
 .wrapped {
   width: 50%;
 }
-.center {
+/* .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
-}
-/* .recipe-header{
-
 } */
+.container{
+     max-width: 800px;
+    background-color :rgba(255, 255, 255, 0.651);
+  background-origin: border-box;
+  height: 150%; /* You must set a specified height */
+  width: 100%;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; 
+  /* text-align: center;  */
+}
 </style>

@@ -1,9 +1,7 @@
 <template>
   <div>
     
-      <h3>
-        <slot></slot>
-      </h3>
+    
       <div class="btn">
       <button  class="randBtn" @click="switchRandom()">New Random Recipes</button>
       </div>
@@ -80,24 +78,27 @@ export default {
 
 <style lang="scss" scoped>
 .btn{
-  
-  margin-left: 25px;
+  text-align: center;
+  margin-right: 25px;
 }
 
 .randBtn {
-	box-shadow: 27px 1px 31px -1px #1c1b18;
-	background:linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
+  
+	box-shadow: 15px 15px 15px 15px #1c1b18;
+	background:linear-gradient(to bottom, #887f63 5%, #fff4d4 100%);
 	background-color:#eae0c2;
-	border-radius:42px;
-	border:2px solid #ffffff;
+	border-radius:10px;
+	border:2px solid #000000;
 	display:inline-block;
 	cursor:pointer;
 	color:#505739;
 	font-family:Georgia;
-	font-size:21px;
+	font-size:16px;
 	font-weight:bold;
 	padding:18px 4px;
-	text-decoration:none;
+	// text-decoration:none;
+  text-align: left;
+  margin-left:10px ;
 }
 .randBtn:hover {
 	background:linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
@@ -107,8 +108,5 @@ export default {
 	position:relative;
 	top:1px;
 }
-// .recipePre{
-//   // width: 50%;
-//   background-color: rgba(120, 120, 120, 0.233);
-// }
+
 </style>

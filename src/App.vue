@@ -9,10 +9,10 @@
           <b-nav-item to="/">Main</b-nav-item>
           <b-nav-item to="/register">Register</b-nav-item>
           <b-nav-item to="/login">Login</b-nav-item>
-          <b-nav-item to="/about" >About</b-nav-item>
-          <b-nav-item to="/search" >search</b-nav-item>
+          <b-nav-item to="/about">About</b-nav-item>
+          <b-nav-item to="/search">search</b-nav-item>
         </b-navbar-nav>
-        
+
         <b-navbar-nav class="ml-auto">
           <b-nav-item-dropdown v-if="$root.store.username" right>
             <template v-slot:button-content>
@@ -26,17 +26,22 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <router-view id="app"/>
+    <router-view id="app" />
   </div>
 </template>
 
-<script>
+<script >
+import MainPageVue from "./pages/MainPage.vue";
 export default {
   name: "App",
   methods: {
     Logout() {
+      // let i=0;
+      // if(i=0)
       this.$root.store.logout();
       this.$root.toast("Logout", "User logged out successfully", "success");
+
+      // if($$root.name==MainPageVue)
 
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
@@ -57,48 +62,10 @@ export default {
   min-height: 100vh;
 }
 
-// #nav {
-//   padding: 30px;
-// }
-
-// #nav a {
-//   font-weight: bold;
-//   color: #2c3e50;
-// }
-
-// #nav a.router-link-exact-active {
-//   color: #42b983;
-// }
-
-// #isConnecting {
-//   color: red;
-// }
-// #logOutBtn {
-//   margin-left: 10px;
-//   transition-duration: 0.4s;
-//   background-color: black;
-//   color: whitesmoke;
-//   padding: 10px;
-//   border-radius: 100%;
-// }
-
-.allPage{
-   background-image:url("../src/images/cuttingBoard.jpg");
+.allPage {
+  background-image: url("../src/images/cuttingBoard.jpg");
   height: 100%; /* You must set a specified height */
   width: 100%;
-  // background-position: center; /* Center the image */
-  background-repeat: repeat; /* Do not repeat the image */
-  // background-size: cover; 
-}
-
-#app{
-  
-  // background-color :rgba(255, 254, 254, 0.699);
-  // background-origin: border-box;
-  // height: 100%; /* You must set a specified height */
-  // width: 100%;
-  // background-position: center; /* Center the image */
-  // background-repeat: no-repeat; /* Do not repeat the image */
-  // background-size: cover; 
+  background-repeat: round; /* Do not repeat the image */
 }
 </style>
