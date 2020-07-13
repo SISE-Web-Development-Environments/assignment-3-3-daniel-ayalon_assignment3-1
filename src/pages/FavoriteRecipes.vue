@@ -1,4 +1,5 @@
 <template>
+<div>
   <b-container>
     <h3>
       favorite recipes
@@ -10,7 +11,10 @@
       </b-row >
     </b-col>
   </b-container>
+  <!-- <recipefavoritePreview v-on:activateFavorite="showFavoriteRecipes"/>  -->
+</div>
 </template>
+
 
 
 
@@ -28,6 +32,8 @@ export default {
   },
   mounted() {
     this.showFavoriteRecipes();
+    
+
   },
 
   methods: {

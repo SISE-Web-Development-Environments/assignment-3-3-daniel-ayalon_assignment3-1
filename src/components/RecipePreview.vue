@@ -20,11 +20,12 @@
     <li v-if="$root.store.username">watched: {{ recipe.watched }}</li>
     <li v-if="$root.store.username">saved: {{ recipe.saved }}</li>
     <!-- <button v-if="$root.store.username" @click="addToFavorite()">add to favorite</button> -->
-     <span v-if="!this.isInTalbe">
-            <button @click="addToFavorite()"> add to favorite</button>
+       
+     <span v-if="isInFavorite()">
+             <button @click="removeFromFavorite()"> remove from favorite</button>
             </span>    
-            <span v-else>
-             <button @click="removeFromFavorite()"> remove from favorite</button>    
+            <span v-else>           
+            <button @click="addToFavorite()"> add to favorite</button>    
             </span>  
   <br>
   <br>
@@ -35,11 +36,12 @@
 
 
 <script>
+
 export default {
+ 
   data() {
     return {
-     the_recipe:this.recipe,
-     isInTalbe:false
+     the_recipe:this.recipe
     };
   },
   props: {
@@ -67,7 +69,7 @@ export default {
         
           });
         if(respone.data.message=="The recipe already marked as favorite"){
-          this.isInTalbe=true;
+          this.$root.store.isInTalbe=true;
         }
       } catch (error) {
         console.log(error);
@@ -82,12 +84,22 @@ export default {
            
            recipe_id:this.the_recipe.id
         
-          });           
+          });   
+       
+        this.$root.store.isInTalbe=false;        
       } catch (error) {
         console.log(error);
       }
 
-}
+},
+  isInFavorite(){
+    if( this.$root.store.isInTalbe==true){
+      return true;
+    }
+  else{
+    return false;
+      }
+  }
   }
 };
 </script>
@@ -137,13 +149,13 @@ export default {
   background-size: cover;
 } */
 
-.recipe-preview .recipe-footer {
+/* .recipe-preview .recipe-footer { */
   /* width: 100%;
   height: 50%;
   overflow: hidden; */
-}
+/* } */
 
-.recipe-preview .recipe-footer .recipe-title {
+/* .recipe-preview .recipe-footer .recipe-title { */
   /* padding: 10px 10px;
   width: 100%;
   font-size: 12pt;
@@ -152,9 +164,9 @@ export default {
   overflow: hidden;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis; */
-}
+/* } */
 
-.recipe-preview .recipe-footer ul.recipe-overview {
+/* .recipe-preview .recipe-footer ul.recipe-overview { */
   /* padding: 5px 10px;
   width: 100%;
   display: -webkit-box;
@@ -171,9 +183,9 @@ export default {
   flex: 1 auto;
   table-layout: fixed;
   margin-bottom: 0px; */
-}
+/* } */
 
-.recipe-preview .recipe-footer ul.recipe-overview li {
+/* .recipe-preview .recipe-footer ul.recipe-overview li { */
   /* -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
@@ -184,7 +196,7 @@ export default {
   width: 90px;
   display: table-cell;
   text-align: center; */
-}
+/* } */
 /* .details {
   text-align: left;
 } */

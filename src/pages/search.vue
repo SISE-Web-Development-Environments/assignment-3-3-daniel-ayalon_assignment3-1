@@ -55,8 +55,6 @@
     >no recipes found</b-alert>
 
     
-
-
     </div>           
 </template>
 <script>
@@ -83,8 +81,8 @@ export default {
              diet:[{ value: null, text: "",  }],
              select_intolarence:null,
              intolarence:[{ value: null, text: "",  }],
-             recipes:[],
-             isBeenSearched:false,
+             recipes:[]
+             
              
              
         }
@@ -116,7 +114,7 @@ export default {
                     searchParams["intolerance"]=this.select_intolarence;
                 } 
                 
-                 console.log(searchParams.query);
+                 
                  let response = await this.axios.get(
                     `http://localhost:3000/recipes/search/query/${this.searching.NameOfFood}/amount/${this.searching.numberOfRecipes}`, {
                         
@@ -139,9 +137,9 @@ export default {
                              this.$root.store.globalRecipes=[];
                              this.$root.store.globalRecipes.push(...this.recipes)
                         }
-                 if(this.recipes.length>0){
-                    this.isBeenSearched=true;
-                 }
+                //  if(this.recipes.length>0){
+                    // this.$root.store.isBeenSearched=true;
+                //  }
                   } catch (error) {
                     console.log(error);
                   }
@@ -163,10 +161,10 @@ export default {
         
         },
         checkIfOk(){
-        if(this.recipes.length==0 && this.isBeenSearched==true){
+        if(this.recipes.length==0 ){
                return false; 
         } 
-        else if(this.isBeenSearched==true){
+        else if(this.recipes.length>0 ){
             return true;
         } 
         },

@@ -1,7 +1,9 @@
 <template>
   <div>
+    <!-- <span v-if="isInTable()"> -->
     <b-container>
       <b-col>
+        
         <router-link
           :to="{ name: 'recipe', params: { recipeId: recipe.recipe_id } }"
           class="recipe-preview"
@@ -14,23 +16,34 @@
           <div id="title">{{ recipe.recipe_name }}</div>
 
           <div class="details">
+            
             <li>minutes:{{ recipe.durationTime }}</li>
             <li>likes:{{ recipe.likes }}</li>
             <li>vegetarian:{{recipe.vegetarian}}</li>
             <li>glutenFree: {{recipe.gluten}}</li>
-            <li>vegan: {{recipe.vegan}}</li>
+            <li>vegan: {{recipe.vegan}}</li>           
+            <button @click="removeFromFavorite()"> remove from favorite</button>
+
+
           </div>
         </b-row>
-      </b-col>
+      </b-col>  
     </b-container>
+    
+   <!-- </span> -->
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {};
+    return {
+       the_recipe:this.recipe
+    };
   },
+   mounted() {
+    this.print()
+   },
   props: {
     recipe: {
       type: Object,
@@ -60,7 +73,35 @@ export default {
     //   }
     // }
   },
-  methods: {}
+  methods: {
+      async removeFromFavorite(){
+          this.axios.defaults.withCredentials = true;
+           console.log(this.the_recipe.recipe_id)
+      try {
+        const response = await this.axios.post(
+          "http://localhost:3000/user/FavoriteRecipeRemove",{         
+           
+           recipe_id:this.the_recipe.recipe_id
+        
+          });   
+         
+       
+        this.$root.store.isInTalbe=false;   
+        this.$root.$emit('favoritePage')     
+      } catch (error) {
+        console.log(error);
+      }
+
+},
+print(){
+  console.log(this.the_recipe.id)
+}
+// isInTable(){
+//   if(this.$root.store.isInTalbe==true);
+//   return true;
+// }
+
+  }
 };
 </script>
 
