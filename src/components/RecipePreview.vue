@@ -15,7 +15,7 @@
     <li>minutes:{{ recipe.readyInMinutes }}</li>
     <img src="../images/likes.png" alt="Likes:" class="img"> {{ recipe.like }}
     <li>vegetarian:{{recipe.vegetarian}}</li>
-    <li>glutenFree: {{recipe.glutenFree}}</li>
+    <li>gluten Free: {{recipe.glutenFree}}</li>
     <li>vegan: {{recipe.vegan}}</li>
     <li v-if="$root.store.username">watched: {{ recipe.watched }}</li>
     <li v-if="$root.store.username">saved: {{ recipe.saved }}</li>

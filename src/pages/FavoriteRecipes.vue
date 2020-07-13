@@ -27,7 +27,8 @@ export default {
   },
   data() {
     return {
-      Favoriterecipes: null
+      Favoriterecipes: null,
+      error:""
     };
   },
   mounted() {
@@ -50,7 +51,8 @@ export default {
         const FavRecipes = response.data;
         this.Favoriterecipes = [];
         this.Favoriterecipes.push(...FavRecipes);
-        // console.log(this.recipes);
+       
+       // console.log(this.recipes);
       } catch (error) {
         console.log(error);
       }

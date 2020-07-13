@@ -1,22 +1,22 @@
 <template>
-  <router-link
-    :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
-    class="recipe-preview"
-  >
-    <div class="recipe-body">
-      <img :src="recipe.image" class="recipe-image" />
+  <div > 
+    <b-col class="recipePre"> 
+      
+     <div :title="recipe.title" class="recipe-title">
+      <strong>
+        <u>{{ recipe.title }}</u>
+      </strong>
     </div>
-   
-
-    <div class="recipe-footer">
-      <div  class="recipe-title">
-        {{ recipe.recipe_name }}
-      </div>
+    <router-link :to="{ name: 'recipePersonal', params: { recipeId: recipe.id } }" class="recipe-preview">
+      <img :src="recipe.image" class="recipe-image" />
+    </router-link>
       <!-- <ul class="recipe-overview"> -->
-        <li>minutes:{{ recipe.durationTime }} </li>
-        <li> vegetarian:{{recipe.vegetarian}}  </li>
-        <li>glutenFree: {{recipe.gluten}} </li>
+       
+        <li>minutes:{{ recipe.readyInMinutes }} </li>
+        <li>vegetarian:{{recipe.vegetarian}}  </li>
+        <li>glutenFree: {{recipe.glutenFree}} </li>
         <li >vegan: {{recipe.vegan}} </li>
+        
         <!-- <div v-if="setCookie()">
           <div>watched: {{ recipe.watched }}</div>
          </div> 
@@ -24,8 +24,9 @@
           <div>saved: {{ recipe.saved }}</div>
           </div>  -->
       <!-- </ul> -->
+    </b-col>
     </div>
-  </router-link>
+ 
 </template>
 
 <script>
@@ -33,7 +34,7 @@ export default {
  
   data() {
     return {
-
+        
     };
   },
   props: {
@@ -75,7 +76,25 @@ export default {
 </script>
 
 <style scoped>
-.recipe-preview {
+.recipe-image {
+  width: 200px;
+  height: auto;
+}
+.recipePre{
+  margin-top: 50px;
+  background-size:100% ;
+  height: 400px;
+  background-color: rgba(255, 254, 254, 0.849);
+}
+.recipe-title{
+  width: 300px;
+  
+}
+.img{
+  width: 20px;
+  height: 20px;
+}
+/* .recipe-preview {
   display: inline-block;
   width: 90%;
   height: 100%;
@@ -88,38 +107,38 @@ export default {
   position: relative;
 }
 
-.recipe-preview .recipe-body .recipe-image {
+.recipe-preview .recipe-body{
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;
   margin-bottom: auto;
   display: block;
-  width: 70%;
+  width: 200px;
   height: auto;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
-}
+} */
 
-.recipe-preview .recipe-footer {
-  width: 100%;
+/* .recipe-preview .recipe-footer { */
+  /* width: 100%;
   height: 50%;
-  overflow: hidden;
-}
+  overflow: hidden; */
+/* } */
 
-.recipe-preview .recipe-footer .recipe-title {
-  padding: 10px 10px;
+/* .recipe-preview .recipe-footer .recipe-title { */
+  /* padding: 10px 10px;
   width: 100%;
-  font-size: 14pt;
+  font-size: 12pt;
   text-align: left;
   white-space: nowrap;
   overflow: hidden;
   -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-}
+  text-overflow: ellipsis; */
+/* } */
 
-.recipe-preview .recipe-footer ul.recipe-overview {
-  padding: 5px 10px;
+/* .recipe-preview .recipe-footer ul.recipe-overview { */
+  /* padding: 5px 10px;
   width: 100%;
   display: -webkit-box;
   display: -moz-box;
@@ -134,11 +153,11 @@ export default {
   -ms-flex: 1 auto;
   flex: 1 auto;
   table-layout: fixed;
-  margin-bottom: 0px;
-}
+  margin-bottom: 0px; */
+/* } */
 
-.recipe-preview .recipe-footer ul.recipe-overview li {
-  -webkit-box-flex: 1;
+/* .recipe-preview .recipe-footer ul.recipe-overview li { */
+  /* -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
   -ms-box-flex: 1;
@@ -147,6 +166,10 @@ export default {
   flex-grow: 1;
   width: 90px;
   display: table-cell;
-  text-align: center;
-}
+  text-align: center; */
+/* } */
+/* .details {
+  text-align: left;
+} */
 </style>
+

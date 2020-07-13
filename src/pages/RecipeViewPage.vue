@@ -46,7 +46,9 @@ export default {
     };
   },
   async created() {
+     
     try {
+      console.log(this.$route.params.recipeId)
       let response;
       // response = this.$route.params.response;
 
@@ -65,7 +67,7 @@ export default {
         this.$router.replace("/NotFound");
         return;
       }
-
+      console.log(response.data)
       let {
         analyzedInstructions,
         instructions,
@@ -114,7 +116,7 @@ export default {
         glutenFree,
         vegetarian
       };
-      console.log(extendedIngredients);
+     
       this.recipe = _recipe;
     } catch (error) {
       console.log(error);

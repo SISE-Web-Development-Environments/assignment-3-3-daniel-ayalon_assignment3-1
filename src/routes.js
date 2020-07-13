@@ -42,7 +42,11 @@ component: () => import("./pages/PersonalRecipes"),
   name: "FamilyRecipesPage",
   component: () => import("./pages/FamilyRecipesPage"),
   },
-  
+  {
+    path: "/recipeID/:recipeId",
+    name: "recipePersonal",
+    component: () => import("./pages/recipesviewPersonalPage"),
+  },
   {
     path: "*",
     name: "notFound",
