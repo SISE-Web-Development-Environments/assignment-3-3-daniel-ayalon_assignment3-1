@@ -59,7 +59,13 @@ export default {
         this.Favoriterecipes = [];
         this.Favoriterecipes.push(...FavRecipes);
       } catch (error) {
-        console.log(error);
+        this.error="there are no recipes to show"
+        if(error.response.data.message === 'unauthorized'){
+          this.$root.store.logout();
+          this.$router.push("/login").catch(() => {
+            this.$forceUpdate();
+      });
+        }
       }
     }
   }
