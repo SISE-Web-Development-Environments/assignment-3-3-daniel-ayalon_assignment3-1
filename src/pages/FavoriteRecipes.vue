@@ -1,13 +1,16 @@
 <template>
 <div>
   <b-container>
+    <Span v-if="error">
+      {{this.error}}
+    </Span>
     <h3>
       favorite recipes
-      <slot></slot>
+      
     </h3>
     <b-col>
        <b-row  v-for="r in Favoriterecipes" :key="r.id">
-        <recipefavoritePreview class="recipePreview" :recipe="r" />
+        <RecipePreview class="recipePreview" :recipe="r" />
       </b-row >
     </b-col>
   </b-container>
@@ -19,11 +22,11 @@
 
 
     <script>
-import recipefavoritePreview from "../components/recipefavoritePreview.vue";
+import RecipePreview from "../components/RecipePreview.vue";
 export default {
   name: "FavoriteRecipes",
   components: {
-    recipefavoritePreview
+    RecipePreview
   },
   data() {
     return {
@@ -47,14 +50,22 @@ export default {
         const response = await this.axios.get(
           "http://localhost:3000/user/FavoriteRecipes"
         );
-        // console.log(response);
+         console.log(response);
         const FavRecipes = response.data;
         this.Favoriterecipes = [];
         this.Favoriterecipes.push(...FavRecipes);
-       
+      //  if(response.data.message== "no favorite recipes to show"){
+         
+      //  }
        // console.log(this.recipes);
       } catch (error) {
-        console.log(error);
+        this.error="there are no recipes to show"
+        if(error.response.data.message === 'unauthorized'){
+          this.$root.store.logout();
+          this.$router.push("/login").catch(() => {
+            this.$forceUpdate();
+      });
+        }
       }
     }
   }

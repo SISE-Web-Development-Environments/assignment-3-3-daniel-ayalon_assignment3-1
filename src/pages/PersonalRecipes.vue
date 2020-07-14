@@ -41,7 +41,12 @@ export default {
         this.persRecipes.push(...PersonalRecipes);
         // console.log(this.recipes);
       } catch (error) {
-        console.log(error);
+        if(error.response.data.message === 'unauthorized'){
+          this.$root.store.logout();
+          this.$router.push("/login").catch(() => {
+            this.$forceUpdate();
+      });
+        }
       }
     }
   }

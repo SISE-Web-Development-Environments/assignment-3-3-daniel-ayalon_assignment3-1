@@ -128,9 +128,14 @@ export default {
     //   console.log(_recipe)
     //   this.recipe = _recipe;
     //    console.log(this.recipe)
-    } catch (error) {
-      console.log(error);
-    }
+    }  catch (error) {
+        if(error.response.data.message === 'unauthorized'){
+          this.$root.store.logout();
+          this.$router.push("/login").catch(() => {
+            this.$forceUpdate();
+      });
+        }
+      }
   }
   }
 };

@@ -21,12 +21,13 @@
     <li v-if="$root.store.username">saved: {{ recipe.saved }}</li>
     <!-- <button v-if="$root.store.username" @click="addToFavorite()">add to favorite</button> -->
        
-     <span v-if="isInFavorite()">
-             <button @click="removeFromFavorite()"> remove from favorite</button>
-            </span>    
-            <span v-else>           
-            <button @click="addToFavorite()"> add to favorite</button>    
-            </span>  
+     <span v-if="$root.store.username && !recipe.saved ">
+            <button @click="addToFavorite()">add to favorite</button>     
+            </span>             
+      <span v-else-if="$root.store.username && recipe.saved  " >
+           <button @click="removeFromFavorite()"> remove from favorite</button>
+      </span>
+           
   <br>
   <br>
   </b-col>
@@ -65,18 +66,21 @@ export default {
            vegetarian:this.the_recipe.vegetarian,
            glutenFree:this.the_recipe.glutenFree,
            vegan:this.the_recipe.vegan,
-           recipe_id:this.the_recipe.id
+           recipe_id:this.the_recipe.id,
+           watched:this.the_recipe.watched,
+           saved:true
         
           });
-        if(respone.data.message=="The recipe already marked as favorite"){
-          this.$root.store.isInTalbe=true;
-        }
+        //  this.$root.store.iscliked=true;
+
+       
       } catch (error) {
         console.log(error);
       }
        },
        async removeFromFavorite(){
           this.axios.defaults.withCredentials = true;
+           
      
       try {
         const response = await this.axios.post(
@@ -85,21 +89,23 @@ export default {
            recipe_id:this.the_recipe.id
         
           });   
-       
-        this.$root.store.isInTalbe=false;        
+       this.$root.$emit('favoritePage') 
+        this.$root.store.iscliked=false;
+        this.$root.store.isInTalbe=true;        
       } catch (error) {
         console.log(error);
       }
 
 },
-  isInFavorite(){
-    if( this.$root.store.isInTalbe==true){
-      return true;
-    }
-  else{
-    return false;
-      }
-  }
+  // isInFavorite(){
+  //   if( this.$root.store.iscliked==true){
+  //     return true;
+  //   }
+  // else{
+  //   return false;
+  //     }
+  // }
+  
   }
 };
 </script>
