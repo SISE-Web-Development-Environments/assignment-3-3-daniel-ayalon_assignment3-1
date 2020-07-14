@@ -96,15 +96,11 @@
       </b-row>
 
       <b-row class="btn">
-        <b-col v-if="$root.store.username">
-          <div v-if="!this.isInTalbe">
-            <button @click="addToFavorite()" class="favBtn">add to favorite</button>
-          </div>
-        </b-col>
-        <b-col>
-          <div v-if="this.isInTalbe">
-            <button @click="removeFromFavorite()" class="favBtn">remove from favorite</button>
-          </div>
+        <b-col class="addbtn" v-if="$root.store.username && !recipe.saved ">
+            <button class="favBtn" @click="addToFavorite()">add to favorite</button>     
+            </b-col>             
+        <b-col class="removebtn" v-else-if="$root.store.username && recipe.saved  " >
+           <button class="favBtn" @click="removeFromFavorite()"> remove from favorite</button>
         </b-col>
       </b-row>
     </b-col>
@@ -157,7 +153,7 @@ export default {
     },
     async removeFromFavorite() {
       this.axios.defaults.withCredentials = true;
-
+      
       try {
         const response = await this.axios.post(
           "http://localhost:3000/user/FavoriteRecipeRemove",
@@ -165,6 +161,7 @@ export default {
             recipe_id: this.the_recipe.id
           }
         );
+        this.$root.$emit('favoritePage')
       } catch (error) {
         console.log(error);
       }

@@ -8,9 +8,7 @@
       </h1>
       <b-row class="inCenter">
         <b-col>
-            <img :src="r.image" class="center" style="margin-top: 20px;"/>
-           
-         
+          <img :src="r.image" class="center" style="margin-top: 20px;" />
         </b-col>
         <b-col>
           <li class="pre">
@@ -117,7 +115,12 @@ export default {
         console.log(personals);
         this.recipe.push(...personals);
       } catch (error) {
-        console.log(error);
+        if (error.response.data.message === "unauthorized") {
+          this.$root.store.logout();
+          this.$router.push("/login").catch(() => {
+            this.$forceUpdate();
+          });
+        }
       }
     }
   }
