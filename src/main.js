@@ -70,6 +70,7 @@ Vue.config.productionTip = false;
 
 const shared_data = {
    globalRecipes:[],
+   isInTalbe:false,
   username: localStorage.username,
   login(username) {
     localStorage.setItem("username", username);

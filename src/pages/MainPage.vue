@@ -11,7 +11,8 @@
         </b-col>
         </div>
         <div class="mainP">
-          <b-col>      
+          <b-col class="right-side">  
+            <h2 v-if="!$root.store.username" style="color:white"><strong><b>Sign In to view your last watched recipes</b></strong></h2>    
             <login v-if="!$root.store.username" class="log"></login>
              <h2 v-if="$root.store.username" style="color:white "><strong ><B>Last Watched Recipes</B></strong></h2>
             <recipeWatchedList
@@ -21,7 +22,7 @@
                 blur: !$root.store.username,
                 center: true
               }"
-              disabled
+              
             ></recipeWatchedList>
           </b-col>
         </div>
@@ -43,6 +44,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h2{
+  text-shadow: 0px 8px  rgb(0, 0, 0), 0 0px rgb(177, 116, 25);
+}
 .title {
   padding-top: 50px;
   color: whitesmoke;
@@ -57,7 +61,7 @@ export default {
   
 }
 .log{
-  margin-top: 180px;
+  margin-top: 120px;
 
 }
 
@@ -114,5 +118,8 @@ export default {
 }
 .RandomRecipes center{
   margin-left: 50px;
+}
+.right-side{
+  margin-left: 180px;
 }
 </style>

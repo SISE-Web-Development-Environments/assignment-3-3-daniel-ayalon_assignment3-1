@@ -1,4 +1,5 @@
 <template>
+<div>
   <b-container>
     <h1 class="title"><b><strong>
       favorite recipes
@@ -19,7 +20,9 @@
       </b-row>
     </b-col>
   </b-container>
+</div>
 </template>
+
 
 
 
@@ -30,12 +33,7 @@ export default {
   components: {
     RecipePreview
   },
-  //  props: {
-  //   // title: {
-  //   //   type: String,
-  //   //   required: true
-  //   // }
-  // },
+
   data() {
     return {
       Favoriterecipes: []
@@ -43,6 +41,11 @@ export default {
   },
   mounted() {
     this.showFavoriteRecipes();
+     this.$root.$on('favoritePage',()=>
+     {
+      this.showFavoriteRecipes();
+    });
+    
   },
 
   methods: {

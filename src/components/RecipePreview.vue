@@ -38,7 +38,7 @@
           <li>
             <b-row>
               <span v-if="recipe.vegetarian">
-                <img src="../images/marked2.png" alt="vegeterian:" class="img" />
+                <img src="../images/marked.png" alt="vegeterian:" class="img" />
               </span>
               <span v-if="!recipe.vegetarian">
                 <img src="../images/Xbox.png" alt="vegeterian:" class="img" />
@@ -49,7 +49,7 @@
           <li>
             <b-row>
               <span v-if="recipe.vegan">
-                <img src="../images/marked2.png" alt="vegan:" class="img" />
+                <img src="../images/marked.png" alt="vegan:" class="img" />
               </span>
               <span v-if="!recipe.vegan">
                 <img src="../images/Xbox.png" alt="vegan:" class="img" />
@@ -62,7 +62,7 @@
           <li>
             <b-row>
               <span v-if="recipe.glutenFree">
-                <img src="../images/marked2.png" alt="glutenFree:" class="img" />
+                <img src="../images/marked.png" alt="glutenFree:" class="img" />
               </span>
               <span v-if="!recipe.glutenFree">
                 <img src="../images/Xbox.png" alt="glutenFree:" class="img" />
@@ -73,7 +73,7 @@
           <li v-if="$root.store.username">
             <b-row>
               <span v-if="recipe.watched">
-                <img src="../images/marked2.png" alt="watched:" class="img" />
+                <img src="../images/marked.png" alt="watched:" class="img" />
               </span>
               <span v-if="!recipe.watched">
                 <img src="../images/Xbox.png" alt="watched:" class="img" />
@@ -84,7 +84,7 @@
           <li v-if="$root.store.username">
             <b-row>
               <span v-if="recipe.saved">
-                <img src="../images/marked2.png" alt="saved:" class="img" />
+                <img src="../images/marked.png" alt="saved:" class="img" />
               </span>
               <span v-if="!recipe.saved">
                 <img src="../images/Xbox.png" alt="saved:" class="img" />
@@ -96,7 +96,7 @@
       </b-row>
 
       <b-row class="btn">
-        <b-col>
+        <b-col v-if="$root.store.username">
           <div v-if="!this.isInTalbe">
             <button @click="addToFavorite()" class="favBtn">add to favorite</button>
           </div>
@@ -114,6 +114,7 @@
 
 <script >
 export default {
+ 
   data() {
     return {
       checkbox: false,

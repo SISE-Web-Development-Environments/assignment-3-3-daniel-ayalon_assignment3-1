@@ -1,152 +1,151 @@
 <template>
-  <router-link
-    :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
-    class="recipe-preview"
-  >
-    <div class="recipe-body">
-      <img :src="recipe.image" class="recipe-image" />
-    </div>
-   
-
-    <div class="recipe-footer">
-      <div  class="recipe-title">
-        {{ recipe.recipe_name }}
+  <div class="container">
+    <b-col class="recipePre">
+      <div :title="recipe.title" class="recipe-title">
+        <strong>
+          <u>{{ recipe.title }}</u>
+        </strong>
       </div>
-      <!-- <ul class="recipe-overview"> -->
-        <li>minutes:{{ recipe.durationTime }} </li>
-        <li> vegetarian:{{recipe.vegetarian}}  </li>
-        <li>glutenFree: {{recipe.gluten}} </li>
-        <li >vegan: {{recipe.vegan}} </li>
-        <!-- <div v-if="setCookie()">
-          <div>watched: {{ recipe.watched }}</div>
-         </div> 
-        <div v-if="setCookie()">
-          <div>saved: {{ recipe.saved }}</div>
-          </div>  -->
-      <!-- </ul> -->
-    </div>
-  </router-link>
+      <router-link
+        :to="{ name: 'recipePersonal', params: { recipeId: recipe.id } }"
+        class="recipe-preview"
+      >
+        <div class="container-image">
+          <img :src="recipe.image" class="recipe-image" />
+
+          <div class="overlay">
+            <div class="image-text">click to see <br>all recipe inforamtion</div>
+          </div>
+        </div>
+      </router-link>
+      <li>
+        <b-row>
+          <img src="../images/clock.png" alt="time:" class="img" />
+
+          <span class="span">{{ recipe.readyInMinutes }}min</span>
+        </b-row>
+      </li>
+      <li>
+        <b-row>
+          <span v-if="recipe.vegetarian">
+            <img src="../images/marked.png" alt="vegetarian:" class="img" />
+          </span>
+          <span v-if="!recipe.vegetarian">
+            <img src="../images/Xbox.png" alt="vegetarian:" class="img" />
+          </span>
+          <span class="span">vegetarian</span>
+        </b-row>
+      </li>
+      <li>
+        <b-row>
+          <span v-if="recipe.glutenFree">
+            <img src="../images/marked.png" alt="glutenFree:" class="img" />
+          </span>
+          <span v-if="!recipe.glutenFree">
+            <img src="../images/Xbox.png" alt="glutenFree:" class="img" />
+          </span>
+          <span class="span">glutenFree</span>
+        </b-row>
+      </li>
+      <li>
+        <b-row>
+          <span v-if="recipe.vegan">
+            <img src="../images/marked.png" alt="vegan:" class="img" />
+          </span>
+          <span v-if="!recipe.vegan">
+            <img src="../images/Xbox.png" alt="vegan:" class="img" />
+          </span>
+          <span class="span">vegan</span>
+        </b-row>
+      </li>
+    </b-col>
+  </div>
 </template>
 
 <script>
 export default {
- 
   data() {
-    return {
-
-    };
+    return {};
   },
   props: {
     recipe: {
       type: Object,
       required: true
-    },
-    // id: {
-    //   type: Number,
-    //   required: true
-    // },
-    // title: {
-    //   type: String,
-    //   required: true
-    // },
-    // readyInMinutes: {
-    //   type: Number,
-    //   required: true
-    // },
-    // image: {
-    //   type: String,
-    //   required: true
-    // },
-    // aggregateLikes: {
-    //   type: Number,
-    //   required: false,
-    //   default() {
-    //     return undefined;
-    //   }
-    // }
+    }
   },
   methods: {
-    async setCookie(){
-       return window.$cookies.isKey('session');
-       
-        }
-}
+    async setCookie() {
+      return window.$cookies.isKey("session");
+    }
+  }
 };
 </script>
 
 <style scoped>
-.recipe-preview {
-  display: inline-block;
-  width: 90%;
-  height: 100%;
-  position: relative;
-  margin: 10px 10px;
-}
-.recipe-preview > .recipe-body {
-  width: 100%;
+.recipe-image {
+  width: 250px;
   height: 200px;
-  position: relative;
 }
-
-.recipe-preview .recipe-body .recipe-image {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
-  display: block;
-  width: 70%;
-  height: auto;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
+li {
+  list-style-type: none;
 }
-
-.recipe-preview .recipe-footer {
-  width: 100%;
-  height: 50%;
-  overflow: hidden;
+.recipePre {
+  margin-top: 50px;
+  background-size: 100%;
+  height: 400px;
+  background-color: rgba(189, 184, 184, 0.699);
 }
-
-.recipe-preview .recipe-footer .recipe-title {
-  padding: 10px 10px;
-  width: 100%;
-  font-size: 14pt;
-  text-align: left;
-  white-space: nowrap;
-  overflow: hidden;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
+/* .recipe-title{
+  width: 300px;
+  
+} */
+.recipe-title {
+  color: #ffffff;
+  font-size: 45px;
+  margin-bottom: 25px;
+  font-family: "Libre Baskerville", serif;
+  line-height: 30px;
+  text-align: center;
+  text-shadow: 0px 5px 4px rgb(0, 0, 0);
 }
-
-.recipe-preview .recipe-footer ul.recipe-overview {
-  padding: 5px 10px;
-  width: 100%;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  -o-box-flex: 1;
-  box-flex: 1;
-  -webkit-flex: 1 auto;
-  -ms-flex: 1 auto;
-  flex: 1 auto;
-  table-layout: fixed;
-  margin-bottom: 0px;
+.img {
+  margin-top: 10px;
+  margin-left: 100px;
+  width: 20px;
+  height: 20px;
 }
-
-.recipe-preview .recipe-footer ul.recipe-overview li {
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  -o-box-flex: 1;
-  -ms-box-flex: 1;
-  box-flex: 1;
-  -webkit-flex-grow: 1;
-  flex-grow: 1;
-  width: 90px;
-  display: table-cell;
+.span {
+  margin-top: 10px;
+}
+.container {
   text-align: center;
 }
+.overlay {
+  position: absolute;
+  top: 90px;
+  left: 35px;
+  /* right: 9px; */
+  opacity: 0.8;
+  background-color: #008cba;
+  overflow: hidden;
+  width: 250px;
+  height: 0;
+  transition: 0.8s ease;
+}
+
+.container-image:hover .overlay {
+  height: 120px;
+}
+.image-text {
+  white-space: nowrap;
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
 </style>
+
