@@ -92,9 +92,14 @@ export default {
 
         // console.log(response);
         // this.$root.loggedIn = true;
-        console.log(this.$root.store.login);
+        // console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);
-        this.$router.push("/");
+        // console.log(this.$router);
+        // alert(this.$router);
+        // console.log(this.$router.currentRoute.path);
+        if(this.$router.currentRoute.path!="/")
+          this.$router.push("/");
+        // console.log(this.$router);
       } catch (err) {
         console.log(err.response);
         this.form.submitError = err.response.data.message;

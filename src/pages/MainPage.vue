@@ -5,17 +5,17 @@
         <div class="mainP">
         <b-col>
           <div class="preview">
-            <h2 style="color:white"><strong ><B>Random Recipes</B></strong></h2>
+            <h2 style="color:white"><strong ><B>Explore these recipes</B></strong></h2>
             <RecipePreviewList title="Random Recipes" class="RandomRecipes center" />
           </div>
         </b-col>
         </div>
         <div class="mainP">
           <b-col class="right-side">  
-            <h2 v-if="!$root.store.username" style="color:white"><strong><b>Sign In to view your last watched recipes</b></strong></h2>    
-            <login v-if="!$root.store.username" class="log"></login>
-             <h2 v-if="$root.store.username" style="color:white "><strong ><B>Last Watched Recipes</B></strong></h2>
-            <recipeWatchedList
+            <h2 v-if="!$root.store.username || !this.cookie" style="color:white"><strong><b>Sign In to view your last watched recipes</b></strong></h2>    
+            <login v-if="!$root.store.username || !this.cookie" class="log"></login>
+             <h2 v-if="$root.store.username  && this.cookie " style="color:white "><strong ><B>Last Watched Recipes</B></strong></h2>
+            <recipeWatchedList v-if="$root.store.username && this.cookie" 
               title="Last Viewed Recipes"
               :class="{
                 RandomRecipes: true,
@@ -38,7 +38,21 @@ export default {
   components: {
     RecipePreviewList,
     login,
+
     recipeWatchedList
+  },
+  data(){
+    return{
+      cookie:false
+    }
+  },
+  mounted(){
+    this.authrationCheck();
+  },
+  methods:{
+    async authrationCheck(){
+      this.cookie=window.$cookies.isKey('session');
+    }
   }
 };
 </script>

@@ -174,6 +174,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+::v-deep .recipePreview .container-image:hover .overlay{
+  height: 120px;
+}
 h5 {
   text-align: center;
 

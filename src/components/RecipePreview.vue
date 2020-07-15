@@ -7,15 +7,15 @@
           <strong>{{ recipe.title }}</strong>
         </div>
         <div class="container-image">
-        <router-link
-          :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
-          class="recipe-preview"
-        >
-          <img :src="recipe.image" class="recipe-image" />
-          <div class="overlay">
-            <div class="image-text">click to see all recipe inforamtion</div>
-          </div>
-        </router-link>
+          <router-link
+            :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
+            class="recipe-preview"
+          >
+            <img :src="recipe.image" class="recipe-image" />
+            <div class="overlay">
+              <div class="image-text">click to see all recipe inforamtion</div>
+            </div>
+          </router-link>
         </div>
       </div>
       <b-row>
@@ -97,12 +97,14 @@
 
       <b-row class="btn">
         <b-col class="addbtn" v-if="$root.store.username && !recipe.saved ">
-            <button class="favBtn" @click="addToFavorite()">add to favorite</button>     
-            </b-col>             
-        <b-col class="removebtn" v-else-if="$root.store.username && recipe.saved  " >
-           <button class="favBtn" @click="removeFromFavorite()"> remove from favorite</button>
+          <button class="favBtn" @click="addToFavorite()">add to favorite</button>
+        </b-col>
+        <b-col class="removebtn" v-else-if="$root.store.username && recipe.saved  ">
+          <button class="favBtn" @click="removeFromFavorite()">remove from favorite</button>
         </b-col>
       </b-row>
+      <br />
+      
     </b-col>
   </div>
 </template>
@@ -110,12 +112,11 @@
 
 <script >
 export default {
- 
   data() {
     return {
-      checkbox: false,
       the_recipe: this.recipe,
-      isInTalbe: false
+      isInTalbe: false,
+     
     };
   },
   props: {
@@ -144,16 +145,18 @@ export default {
             saved: true
           }
         );
-        if (respone.data.message == "The recipe already marked as favorite") {
+        if (response.data.message == "The recipe already marked as favorite") {
           this.isInTalbe = true;
-        }
+          
+        } 
+        this.the_recipe.saved=true;
       } catch (error) {
         console.log(error);
       }
     },
     async removeFromFavorite() {
       this.axios.defaults.withCredentials = true;
-      
+   
       try {
         const response = await this.axios.post(
           "http://localhost:3000/user/FavoriteRecipeRemove",
@@ -161,7 +164,9 @@ export default {
             recipe_id: this.the_recipe.id
           }
         );
-        this.$root.$emit('favoritePage')
+        this.$root.$emit("favoritePage");
+        
+        this.the_recipe.saved=false;
       } catch (error) {
         console.log(error);
       }
@@ -206,6 +211,7 @@ export default {
   height: 25px;
 }
 li {
+  
   margin-bottom: 10px;
   list-style-type: none;
 }

@@ -132,7 +132,7 @@
           <b-form-group id="input-group-Image" label-for="image">
             <b-form-input
               id="image"
-              type="image"
+              type="text"
               placeholder="Enter image url"
               v-model="$v.form.image.$model"
               :state="validateState('image')"

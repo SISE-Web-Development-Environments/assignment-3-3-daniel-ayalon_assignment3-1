@@ -1,39 +1,104 @@
 <template>
   <div class="container">
     <div v-if="recipe">
-      <div class="recipe-header mt-3 mb-4">
-        <h1>{{ recipe.title }}</h1>
-        <img :src="recipe.image" class="center" />
-      </div>
-      <div class="recipe-body">
-        <div class="wrapper">
-          <div class="wrapped">
-            <div class="mb-3">
-              <li>minutes:{{ recipe.readyInMinutes }}</li>
-              <li>likes:{{ recipe.like }}</li>
-              <li v-if="recipe.watched">watched: {{ recipe.watched }}</li>
-              <li v-if="recipe.saved">saved: {{ recipe.saved }}</li>
-              <li>vegetarian:{{recipe.vegetarian}}</li>
-              <li>glutenFree: {{recipe.glutenFree}}</li>
-              <li>vegan: {{recipe.vegan}}</li>
-            </div>Ingredients:
-            <ul>
-              <li v-for="(r, index) in recipe.extendedIngredients" :key="index + '_' + r.id">
-                {{r.name}}:
-                {{r.amount}}
-                {{r.unit}}
+      <h1 class=title><strong><b>{{ recipe.title }}</b></strong></h1>
+      <b-row>
+        <b-col>
+          <img :src="recipe.image" class="center" />
+        </b-col>
+        <b-col>
+          <b-row>
+            <b-col>
+              <li id="details" class="details">
+                <b-row>
+                  <img src="../images/clock.png" alt="Likes:" class="img" />
+
+                  <span class="time">{{ recipe.readyInMinutes }}min</span>
+                </b-row>
               </li>
-            </ul>
-          </div>
-          <div class="wrapped">
-            Instructions:
-            <ol>
-              <li v-for="s in recipe._instructions" :key="s.number">{{ s.step }}</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    
+              <li id="details" class="details">
+                <b-row>
+                  <img src="../images/likes.png" alt="Likes:" class="img" />
+
+                  <span class="time">{{ recipe.like }}</span>
+                </b-row>
+              </li>
+
+              <li id="details" class="details">
+                <b-row>
+                  <span v-if="recipe.vegetarian">
+                    <img src="../images/marked.png" alt="vegeterian:" class="img" />
+                  </span>
+                  <span v-if="!recipe.vegetarian">
+                    <img src="../images/Xbox.png" alt="vegeterian:" class="img" />
+                  </span>
+                  <span class="vegeterian">vegetarian</span>
+                </b-row>
+              </li>
+              <li id="details" class="details">
+                <b-row>
+                  <span v-if="recipe.glutenFree">
+                    <img src="../images/marked.png" alt="glutenFree:" class="img" />
+                  </span>
+                  <span v-if="!recipe.glutenFree">
+                    <img src="../images/Xbox.png" alt="glutenFree:" class="img" />
+                  </span>
+                  <span class="vegeterian">glutenFree</span>
+                </b-row>
+              </li>
+            </b-col>
+            <b-col>
+              <li id="details" class="details">
+                <b-row>
+                  <span v-if="recipe.vegan">
+                    <img src="../images/marked.png" alt="vegan:" class="img" />
+                  </span>
+                  <span v-if="!recipe.vegan">
+                    <img src="../images/Xbox.png" alt="vegan:" class="img" />
+                  </span>
+                  <span class="vegeterian">vegan</span>
+                </b-row>
+              </li>
+              <li id="details" class="details" v-if="$root.store.username">
+                <b-row>
+                  <img src="../images/marked.png" alt="watched:" class="img" />
+                  <span class="vegeterian">watched</span>
+                </b-row>
+              </li>
+              <li id="details" class="details" v-if="$root.store.username">
+                <b-row>
+                  <span v-if="recipe.watched">
+                    <img src="../images/marked.png" alt="watched:" class="img" />
+                  </span>
+                  <span v-if="!recipe.watched">
+                    <img src="../images/Xbox.png" alt="watched:" class="img" />
+                  </span>
+                  <span class="vegeterian">saved</span>
+                </b-row>
+              </li>
+            </b-col>
+          </b-row>
+        </b-col>
+      </b-row><h3><Strong>Ingredients:</Strong></h3>
+      <ul>
+       <b> <li
+          id="bulet"
+          class="details"
+          v-for="(r, index) in recipe.extendedIngredients"
+          :key="index + '_' + r.id"
+          
+        >
+        <img
+                  class="integ"
+                  src="https://www.freeiconspng.com/uploads/restaurant-icon-png-plate-1.png">
+          {{r.name}}:
+          {{r.amount}}
+          {{r.unit}}
+        </li></b>
+      </ul><h3><Strong>Instructions:</Strong></h3>
+      <ol>
+        <b><li class="num" v-for="s in recipe._instructions" :key="s.number">{{ s.step }}</li></b>
+      </ol>
     </div>
   </div>
 </template>
@@ -46,9 +111,8 @@ export default {
     };
   },
   async created() {
-     
     try {
-      console.log(this.$route.params.recipeId)
+      console.log(this.$route.params.recipeId);
       let response;
       // response = this.$route.params.response;
 
@@ -67,7 +131,7 @@ export default {
         this.$router.replace("/NotFound");
         return;
       }
-      console.log(response.data)
+      console.log(response.data);
       let {
         analyzedInstructions,
         instructions,
@@ -78,12 +142,13 @@ export default {
         title,
         vegan,
         glutenFree,
-        vegetarian
+        vegetarian,
+        saved,
+        watched
       } = response.data;
 
       let _instructions = analyzedInstructions;
 
- 
       let _recipe = {
         instructions,
         _instructions,
@@ -95,9 +160,11 @@ export default {
         title,
         vegan,
         glutenFree,
-        vegetarian
+        vegetarian,
+        saved,
+        watched
       };
-     
+
       this.recipe = _recipe;
     } catch (error) {
       console.log(error);
@@ -107,27 +174,72 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/* .wrapper {
-  display: flex;
-} */
-.wrapped {
-  width: 50%;
+li{
+  font-family: "Libre Baskerville", serif;
+  font-size: 20px;
 }
-/* .center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-} */
-.container{
-     max-width: 800px;
-    background-color :rgba(255, 255, 255, 0.651);
+#bulet{
+  margin-top: 15px;
+}
+.details {
+  list-style: none;
+  margin-left: 5px;
+}
+#details {
+  margin-left: 50px;
+  margin-top: 30px;
+}
+
+.center {
+  margin-left: 40px;
+  margin-top: 15px;
+  width: 340px;
+}
+.integ{
+  width: 25px;
+  // margin-top: 15px;
+  margin-right: 10px;
+}
+.container {
+  max-width: 800px;
+  background-color: rgba(255, 255, 255, 0.651);
   background-origin: border-box;
   height: 150%; /* You must set a specified height */
   width: 100%;
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; 
-  /* text-align: center;  */
+  background-size: cover;
+}
+.img {
+  margin-left: 18px;
+  margin-right: 6px;
+  width: 25px;
+  height: 25px;
+}
+h3 {
+  margin-top: 20px;
+  color: rgb(0, 0, 0);
+  font-weight: normal;
+  font-family: "Ultra", sans-serif;
+  font-size: 30px;
+  // line-height: 70px;
+  text-transform: uppercase;
+  background-position: center;
+}
+.title {
+  padding-top: 50px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  font-weight: normal;
+  font-family: "Ultra", sans-serif;
+  font-size: 40px;
+  line-height: 70px;
+  text-transform: uppercase;
+  background-position: center;
+}
+
+.num{
+  line-height: 35px;
+  margin-bottom: 20px;
 }
 </style>

@@ -7,14 +7,14 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item to="/">Main</b-nav-item>
-          <b-nav-item to="/register">Register</b-nav-item>
-          <b-nav-item to="/login">Login</b-nav-item>
+          <b-nav-item v-if="!$root.store.username" to="/register">Register</b-nav-item>
+          <b-nav-item v-if="!$root.store.username" to="/login">Login</b-nav-item>
           <b-nav-item to="/about">About</b-nav-item>
           <b-nav-item to="/search">search</b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
-          <b-nav-item-dropdown v-if="$root.store.username" right>
+          <b-nav-item-dropdown v-if="$root.store.username && cookie" right>
             <template v-slot:button-content>
               <em>Personal</em>
             </template>
@@ -22,7 +22,7 @@
             <b-dropdown-item to="/PersonalRecipes">My Recipes</b-dropdown-item>
             <b-dropdown-item to="/myFamilyRecipes">My Family Recipes</b-dropdown-item>
           </b-nav-item-dropdown>
-          <b-nav-item v-if="$root.store.username" @click="Logout" to="/">Log out</b-nav-item>
+          <b-nav-item v-if="$root.store.username && cookie" @click="Logout">Log out</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -34,15 +34,28 @@
 import MainPageVue from "./pages/MainPage.vue";
 export default {
   name: "App",
+  data() {
+    return {
+      cookie: false,
+      inMain: false
+    };
+  },
+  mounted() {
+    this.checkCookie();
+    this.checkMain();
+  },
   methods: {
+    checkMain() {
+      if ("/" == this.$router.currentRoute.path)
+        this.inMain = this.$router.currentRoute.path;
+    },
+    checkCookie() {
+      this.cookie = window.$cookies.isKey("session");
+    },
     Logout() {
-      // let i=0;
-      // if(i=0)
       this.$root.store.logout();
+      console.log("app");
       this.$root.toast("Logout", "User logged out successfully", "success");
-
-      // if($$root.name==MainPageVue)
-
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });

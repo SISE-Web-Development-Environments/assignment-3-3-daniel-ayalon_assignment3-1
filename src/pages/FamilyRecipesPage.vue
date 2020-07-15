@@ -59,20 +59,13 @@ export default {
   text-align: center;
 	font-weight: normal;
 	font-family: 'Ultra', sans-serif;   
-	font-size: 35px;
+	font-size: 77.179px;
 	line-height: 70px;
 	text-transform: uppercase;
   text-shadow: 0px 8px  rgb(0, 0, 0), 0 0px rgb(177, 116, 25);
   background-position:center ;
 }
-// .blur {
-//   -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
-//   filter: blur(2px);
-// }
-// ::v-deep .blur .recipe-preview {
-//   pointer-events: none;
-//   cursor: default;
-// }
+
 .container{
    max-width: 900px;
   

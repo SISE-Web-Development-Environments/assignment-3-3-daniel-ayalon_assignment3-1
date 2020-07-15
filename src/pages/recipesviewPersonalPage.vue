@@ -138,10 +138,7 @@ export default {
 .wrapped {
   width: 50%;
 }
-// #image {
-//   line-height: 1.5em;
-//   list-style-image: url();
-// }
+
 .pre {
   list-style-type: none;
 }
@@ -153,19 +150,15 @@ export default {
 .center {
   display: block;
   margin-left: auto;
-  // margin-right: auto;
 }
 h3 {
   margin-top: 20px;
-
   color: rgb(0, 0, 0);
-  // text-align: center;
   font-weight: normal;
   font-family: "Ultra", sans-serif;
   font-size: 30px;
   line-height: 70px;
   text-transform: uppercase;
-  // text-shadow: 0px 8px  whitesmoke, 0 0px rgb(177, 116, 25);
   background-position: center;
 }
 .img {
@@ -176,15 +169,12 @@ h3 {
   height: 30px;
 }
 img {
-  // margin-left: 50px;
-  // margin-top: 20px;
   width: 300px;
   height: 250px;
 }
 li {
   color: rgb(38, 38, 77);
   font-size: 25px;
-  // background-color: whitesmoke;
 }
 .span {
   margin-top: 30px;
@@ -205,7 +195,6 @@ li {
   font-size: 50px;
   line-height: 70px;
   text-transform: uppercase;
-  // text-shadow: 0px 8px  whitesmoke, 0 0px rgb(177, 116, 25);
   background-position: center;
 }
 
@@ -218,6 +207,5 @@ li {
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover;
-  // text-align: center;
 }
 </style>

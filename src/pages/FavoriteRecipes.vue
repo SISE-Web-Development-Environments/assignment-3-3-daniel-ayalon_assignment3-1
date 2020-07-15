@@ -1,29 +1,35 @@
 <template>
-<div>
-  <b-container>
-    <h1 class="title"><b><strong>
-      favorite recipes
-      <slot></slot></strong></b>
-    </h1>
-    <h3 class="title1" v-if="error">
-     <b> <strong>{{this.error}}</strong></b>
-    </h3>
-    <b-col>
-      <b-row v-for="r in Favoriterecipes" :key="r.id">
-        <RecipePreview
-          title="Last Viewed Recipes"
-          :class="{
+  <div>
+    <b-container>
+      <h1 class="title">
+        <b>
+          <strong>
+            favorite recipes
+            <slot></slot>
+          </strong>
+        </b>
+      </h1>
+      <h3 class="title1" v-if="error">
+        <b>
+          <strong>{{this.error}}</strong>
+        </b>
+      </h3>
+      <b-col>
+        <b-row v-for="r in Favoriterecipes" :key="r.id">
+          <RecipePreview
+            title="Last Viewed Recipes"
+            :class="{
                 RandomRecipes: true,
                 blur: !$root.store.username,
                 center: true
               }"
-          class="recipePreview"
-          :recipe="r"
-        />
-      </b-row>
-    </b-col>
-  </b-container>
-</div>
+            class="recipePreview"
+            :recipe="r"
+          />
+        </b-row>
+      </b-col>
+    </b-container>
+  </div>
 </template>
 
 
@@ -40,16 +46,14 @@ export default {
   data() {
     return {
       Favoriterecipes: [],
-      error:""
+      error: ""
     };
   },
   mounted() {
     this.showFavoriteRecipes();
-     this.$root.$on('favoritePage',()=>
-     {
+    this.$root.$on("favoritePage", () => {
       this.showFavoriteRecipes();
     });
-    
   },
 
   methods: {
@@ -63,12 +67,16 @@ export default {
         this.Favoriterecipes = [];
         this.Favoriterecipes.push(...FavRecipes);
       } catch (error) {
-        this.error="there are no recipes to show"
-        if(error.response.data.message === 'unauthorized'){
-          this.$root.store.logout();
-          this.$router.push("/login").catch(() => {
-            this.$forceUpdate();
-      });
+        
+        try {
+          if (error.response.data.message === "unauthorized") {
+            this.$root.store.logout();
+            this.$router.push("/login").catch(() => {
+              this.$forceUpdate();
+            });
+          }
+        } catch (e) {
+          this.error = "there are no recipes to show";
         }
       }
     }
@@ -77,27 +85,27 @@ export default {
 </script>
 <style lang="scss" scoped>
 .title {
-   padding-top: 50px;
+  padding-top: 50px;
   color: whitesmoke;
   text-align: center;
-	font-weight: normal;
-	font-family: 'Ultra', sans-serif;   
-	font-size: 36px;
-	line-height: 70px;
-	text-transform: uppercase;
-  text-shadow: 0px 8px  rgb(0, 0, 0), 0 0px rgb(177, 116, 25);
-  background-position:center ;
+  font-weight: normal;
+  font-family: "Ultra", sans-serif;
+  font-size: 36px;
+  line-height: 70px;
+  text-transform: uppercase;
+  text-shadow: 0px 8px rgb(0, 0, 0), 0 0px rgb(177, 116, 25);
+  background-position: center;
 }
 .title1 {
-   padding-top: 50px;
+  padding-top: 50px;
   color: rgb(121, 0, 0);
   text-align: center;
-	font-weight: normal;
-	font-family: 'Ultra', sans-serif;   
-	font-size: 36px;
-	line-height: 70px;
-	text-transform: uppercase;
+  font-weight: normal;
+  font-family: "Ultra", sans-serif;
+  font-size: 36px;
+  line-height: 70px;
+  text-transform: uppercase;
   // text-shadow: 0px 8px  rgb(0, 0, 0), 0 0px rgb(177, 116, 25);
-  background-position:center ;
+  background-position: center;
 }
 </style>

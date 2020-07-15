@@ -11,40 +11,53 @@
           <b-col>
             <img :src="recipe.image" class="center" />
           </b-col>
-          <b-col class="aouther">
-            <b>
-              <u class="aouther-title">aouther:</u>
-            </b>
-            {{ recipe.aouther }}
+          <b-col class="preView">
+            <b-row>
+              <h6 class="pre-title">
+                <strong>Aouther:</strong>
+              </h6>
+              {{ recipe.aouther }}
+            </b-row>
+            <b-row>
+              <h6 class="pre-title">
+                <strong>
+                  <b>Used Time:</b>
+                </strong>
+              </h6>
+              {{ recipe.timeThatUsed }}
+            </b-row>
+            <b-row>
+              <h6 class="pre-title">
+                <strong>Vegetarian:</strong>
+              </h6>
+              <span v-if="recipe.vegetarian">
+                <img src="../images/marked.png" alt="saved:" class="img" />
+              </span>
+              <span v-if="!recipe.vegetarian">
+                <img src="../images/Xbox.png" alt="saved:" class="img" />
+              </span>
+            </b-row>
           </b-col>
         </b-row>
       </div>
       <div>
         <div class="wrapper">
           <div class="wrapped">
-            <div class="mb-3">
-            
-              <li>
-                <b>
-                  <u class="details">vegetarian:</u>
-                </b>
-                {{ recipe.vegetarian }}
-              </li>
-              <li>
-                <b>
-                  <u class="details">Time that used:</u>
-                </b>
-                {{ recipe.timeThatUsed }}
-              </li>
-            </div>Ingrediants:
+            <h3><strong><b>Ingrediants:</b></strong></h3>
             <ul>
-              <li v-for="(r,index) in recipe.products" :key="index+'_'+r.id">{{r}}</li>
+              <li id="integ" v-for="(r,index) in recipe.products" :key="index+'_'+r.id">
+                <img
+                  class="integ"
+                  src="https://www.freeiconspng.com/uploads/restaurant-icon-png-plate-1.png"
+                />
+                <b>{{r}}</b>
+              </li>
             </ul>
           </div>
           <div class="wrapped">
-            Instructions:
+           <h3><strong><b> Instructions:</b></strong></h3>
             <ol>
-              <li v-for="(r,index) in recipe.Instructions" :key="index+'_'+r.id">{{r}}</li>
+              <b><li class="instruct" v-for="(r,index) in recipe.Instructions" :key="index+'_'+r.id"><b>{{r}}</b></li></b>
             </ol>
           </div>
         </div>
@@ -68,38 +81,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.details {
-  padding-top: 50px;
-  color: black;
-  text-align: center;
-  font-weight: normal;
-  font-family: "Ultra", sans-serif;
-  font-size: 20px;
-  line-height: 70px;
-  text-transform: uppercase;
-  // text-shadow: 0px 8px  rgb(0, 0, 0), 0 0px rgb(177, 116, 25);
-  background-position: center;
+.img {
+  width: 40px;
+  height: auto;
 }
+
 .recipe-body {
-  background-color: rgba(155, 155, 155, 0.596);
+  background-color: rgba(155, 155, 155, 0.774);
 }
-.wrapper {
-  display: flex;
-}
-.wrapped {
-  width: 50%;
-}
+
 .center {
   width: 350px;
   height: 300px;
   display: block;
-  margin-left: 100px;
-  // margin-right: auto;
-  // width: 65%;
+  margin-left: 40px;
+  
 }
-/* .recipe-header{
 
-} */
 .title {
   padding-top: 20px;
   margin-top: 40px;
@@ -112,23 +110,41 @@ export default {
   text-shadow: 0px 5px 4px rgb(0, 0, 0);
 }
 
-.aouther{
-  // margin-left: 150px;
+.preView {
+  margin-right: 40px;
   font-size: 25px;
-  // margin-bottom: 25px;
   font-family: "Libre Baskerville", serif;
-  // line-height: 30px;
+  line-height: 65px;
   text-align: center;
-  // text-shadow: 0px 5px 4px rgb(0, 0, 0);
-  
 }
-.aouther-title{
-   color: #030303;
-  font-size: 35px;
+.pre-title {
+  color: #030303;
+  font-size: 34px;
   margin-bottom: 25px;
   font-family: "Libre Baskerville", serif;
-  line-height: 30px;
+  line-height: 60px;
   text-align: center;
-  // text-shadow: 0px 5px 4px rgb(0, 0, 0);
+  text-shadow: 0px 2px 3.5px rgb(0, 0, 0);
+}
+.integ{
+  width: 35px;
+  height: 35px;
+}
+#integ {
+  margin-top: 10px;
+  list-style-type: none;
+  font-size: 25px;
+}
+.instruct{
+  font-size: 25px;
+  font-family: "Lucida Console", Courier, monospace;
+  margin:10px;
+  line-height: 40px;
+  margin-left: 40px;
+  margin-bottom:30px ;
+  
+}
+.container{
+  margin-bottom: 40px;
 }
 </style>
