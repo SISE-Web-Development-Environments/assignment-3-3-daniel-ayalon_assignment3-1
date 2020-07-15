@@ -14,7 +14,7 @@
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
-          <b-nav-item-dropdown v-if="$root.store.username && cookie" right>
+          <b-nav-item-dropdown v-if="$root.store.username" right>
             <template v-slot:button-content>
               <em>Personal</em>
             </template>
@@ -22,7 +22,7 @@
             <b-dropdown-item to="/PersonalRecipes">My Recipes</b-dropdown-item>
             <b-dropdown-item to="/myFamilyRecipes">My Family Recipes</b-dropdown-item>
           </b-nav-item-dropdown>
-          <b-nav-item v-if="$root.store.username && cookie" @click="Logout">Log out</b-nav-item>
+          <b-nav-item v-if="$root.store.username " @click="Logout">Log out</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -36,12 +36,12 @@ export default {
   name: "App",
   data() {
     return {
-      cookie: false,
+      // cookie: false,
       inMain: false
     };
   },
   mounted() {
-    this.checkCookie();
+    // this.checkCookie();
     this.checkMain();
   },
   methods: {
@@ -49,9 +49,10 @@ export default {
       if ("/" == this.$router.currentRoute.path)
         this.inMain = this.$router.currentRoute.path;
     },
-    checkCookie() {
-      this.cookie = window.$cookies.isKey("session");
-    },
+    // checkCookie() {
+    //   this.cookie = window.$cookies.isKey("session");
+      
+    // },
     Logout() {
       this.$root.store.logout();
       console.log("app");

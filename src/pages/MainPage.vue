@@ -12,10 +12,10 @@
         </div>
         <div class="mainP">
           <b-col class="right-side">  
-            <h2 v-if="!$root.store.username || !this.cookie" style="color:white"><strong><b>Sign In to view your last watched recipes</b></strong></h2>    
-            <login v-if="!$root.store.username || !this.cookie" class="log"></login>
-             <h2 v-if="$root.store.username  && this.cookie " style="color:white "><strong ><B>Last Watched Recipes</B></strong></h2>
-            <recipeWatchedList v-if="$root.store.username && this.cookie" 
+            <h2 v-if="!$root.store.username " style="color:white"><strong><b>Sign In to view your last watched recipes</b></strong></h2>    
+            <login v-if="!$root.store.username " class="log"></login>
+             <h2 v-if="$root.store.username   " style="color:white "><strong ><B>Last Watched Recipes</B></strong></h2>
+            <recipeWatchedList v-if="$root.store.username" 
               title="Last Viewed Recipes"
               :class="{
                 RandomRecipes: true,
@@ -47,7 +47,8 @@ export default {
     }
   },
   mounted(){
-    this.authrationCheck();
+    // this.authrationCheck();
+    
   },
   methods:{
     async authrationCheck(){
