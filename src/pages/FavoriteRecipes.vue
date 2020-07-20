@@ -105,7 +105,6 @@ export default {
   font-size: 36px;
   line-height: 70px;
   text-transform: uppercase;
-  // text-shadow: 0px 8px  rgb(0, 0, 0), 0 0px rgb(177, 116, 25);
   background-position: center;
 }
 </style>

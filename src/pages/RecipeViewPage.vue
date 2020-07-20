@@ -112,9 +112,7 @@ export default {
   },
   async created() {
     try {
-      console.log(this.$route.params.recipeId);
       let response;
-      // response = this.$route.params.response;
 
       try {
         response = await this.axios.get(
@@ -124,14 +122,12 @@ export default {
           }
         );
 
-        // console.log("response.status", response.status);
         if (response.status !== 200) this.$router.replace("/NotFound");
       } catch (error) {
         console.log("error.response.status", error.response.status);
         this.$router.replace("/NotFound");
         return;
       }
-      console.log(response.data);
       let {
         analyzedInstructions,
         instructions,
@@ -197,12 +193,11 @@ li{
 }
 .integ{
   width: 25px;
-  // margin-top: 15px;
   margin-right: 10px;
 }
 .container {
   max-width: 800px;
-  background-color: rgba(255, 255, 255, 0.651);
+  background-color: rgba(170, 136, 108, 0.6);
   background-origin: border-box;
   height: 150%; /* You must set a specified height */
   width: 100%;
@@ -222,7 +217,6 @@ h3 {
   font-weight: normal;
   font-family: "Ultra", sans-serif;
   font-size: 30px;
-  // line-height: 70px;
   text-transform: uppercase;
   background-position: center;
 }

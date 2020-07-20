@@ -67,7 +67,7 @@
         </b-row>
       </span>
     </b-col>
-    <b-alert v-if="!checkIfOk()" variant="warning" dismissible show>no recipes found</b-alert>
+    <b-alert v-model="showDismissibleAlert" variant="warning" dismissible style="text-align:center">no recipes found</b-alert>
   </div>
 </template>
 <script>
@@ -96,8 +96,8 @@ export default {
         { value: null, text: "choos intolarence you don't like.." }
       ],
       isSearched:false,
-      recipes: []
-      
+      recipes: [],
+      showDismissibleAlert:false
     };
   },
   mounted() {
@@ -105,7 +105,6 @@ export default {
     this.cuisine.push(...cuisine);
     this.diet.push(...diet);
     this.intolarence.push(...intolarence);
-    // console.log($v);
 
     this.lastSearch();
   },
@@ -125,16 +124,12 @@ export default {
           searchParams["intolerance"] = this.select_intolarence;
         }
 
-        console.log(searchParams.query);
         let response = await this.axios.get(
           `http://localhost:3000/recipes/search/query/${this.searching.NameOfFood}/amount/${this.searching.numberOfRecipes}`,
           {
             params: searchParams
           }
         );
-        console.log(response);
-
-        // console.log(this.searching.numberOfRecipes)
         const found_recipes = response.data;
         this.recipes = [];
         this.recipes.push(...found_recipes);
@@ -145,6 +140,12 @@ export default {
         }
         if (this.recipes.length > 0) {
           this.isBeenSearched = true;
+        }
+        if (this.recipes.length == 0){
+          this.showDismissibleAlert=true;
+        }
+        else{
+        this.showDismissibleAlert=false;
         }
       } catch (error) {
         console.log(error);

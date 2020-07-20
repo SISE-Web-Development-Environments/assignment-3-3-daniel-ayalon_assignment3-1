@@ -2,10 +2,7 @@
   <div class="container">
     <h1 class="title">Login</h1>
     <b-form @submit.prevent="onLogin">
-      <b-form-group
-        id="input-group-Username"
-        label-for="Username"
-      >
+      <b-form-group id="input-group-Username" label-for="Username">
         <b-form-input
           id="Username"
           v-model="$v.form.username.$model"
@@ -16,10 +13,7 @@
         <b-form-invalid-feedback>Username is required</b-form-invalid-feedback>
       </b-form-group>
 
-      <b-form-group
-        id="input-group-Password"
-        label-for="Password"
-      >
+      <b-form-group id="input-group-Password" label-for="Password">
         <b-form-input
           id="Password"
           type="password"
@@ -38,7 +32,9 @@
       >Login</b-button>
       <div class="mt-2">
         Do not have an account yet?
-        <router-link class="rLink" to="register"><u>Register in here</u></router-link>
+        <router-link class="rLink" to="register">
+          <u>Register in here</u>
+        </router-link>
       </div>
     </b-form>
     <b-alert
@@ -81,61 +77,53 @@ export default {
     },
     async Login() {
       try {
-        const response = await this.axios.post(
-          "http://localhost:3000/auth/Login",
-          {
-            username: this.form.username,
-            password: this.form.password
-          },
-          { withCredentials: true }
-        );
-
-        // console.log(response);
-        // this.$root.loggedIn = true;
-        // console.log(this.$root.store.login);
-        this.$root.store.login(this.form.username);
-        // console.log(this.$router);
-        // alert(this.$router);
-        // console.log(this.$router.currentRoute.path);
-        if(this.$router.currentRoute.path!="/")
-          this.$router.push("/");
-        // console.log(this.$router);
+        const response = await this.axios
+          .post(
+            "http://localhost:3000/auth/Login",
+            {
+              username: this.form.username,
+              password: this.form.password
+            },
+            { withCredentials: true }
+          )
+          .then(res => {
+            this.$root.store.image = res.data[0].Image;
+          });
+        this.$root.store.login(this.form.username, this.$root.store.image);
+        if (this.$router.currentRoute.path != "/") this.$router.push("/");
       } catch (err) {
         console.log(err.response);
         this.form.submitError = err.response.data.message;
       }
     },
     onLogin() {
-      // console.log("login method called");
       this.form.submitError = undefined;
       this.$v.form.$touch();
       if (this.$v.form.$anyError) {
         return;
       }
-      // console.log("login method go");
-     
+
       this.Login();
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-.container{
-   max-width: 400px;
-   background-color :rgba(255, 255, 255, 0.651);
+.container {
+  max-width: 400px;
+  background-color: rgba(255, 255, 255, 0.651);
   background-origin: border-box;
   height: 100%; /* You must set a specified height */
   width: 100%;
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; 
-  text-align: center; 
+  background-size: cover;
+  text-align: center;
 }
-.title{
-    text-align: center;
-    
+.title {
+  text-align: center;
 }
-.rLink{
-    color: black;
+.rLink {
+  color: black;
 }
 </style>

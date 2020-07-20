@@ -165,7 +165,6 @@ export default {
           }
         );
         this.$root.$emit("favoritePage");
-        
         this.the_recipe.saved=false;
       } catch (error) {
         console.log(error);
@@ -177,7 +176,6 @@ export default {
 
 <style scoped>
 .container {
-  /* text-align: center; */
   width: 400px;
 }
 .watched {
@@ -199,7 +197,6 @@ export default {
 }
 .recipePre {
   margin-top: 70px;
-  /* background-size: 20%; */
   height: 570px;
   background-color: rgb(214, 214, 214);
 }

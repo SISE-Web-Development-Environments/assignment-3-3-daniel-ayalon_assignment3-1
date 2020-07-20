@@ -47,12 +47,9 @@ export default {
         const response = await this.axios.get(
           "http://localhost:3000/recipes/randomRecipes"
         );
-
-        // console.log(response);
         const recipes = response.data;
         this.recipes = [];
         this.recipes.push(...recipes);
-        //   console.log(this.recipes);
       } catch (error) {
         console.log(error);
       }
@@ -63,12 +60,9 @@ export default {
         const response = await this.axios.get(
           "http://localhost:3000/recipes/randomRecipes"
         );
-
-        // console.log(response);
         const newRecipes = response.data;
         this.recipes = [];
         this.recipes.push(...newRecipes);
-        //   console.log(this.recipes);
       } catch (error) {
         console.log(error);
       }

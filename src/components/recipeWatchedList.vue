@@ -40,14 +40,9 @@ export default {
         const response = await this.axios.get(
           "http://localhost:3000/user/ThreeLastRecipes"
         );
-
-        // console.log(response);
-
         const Watchedrecipes = response.data;
-        //console.log(response.data)
         this.recipes = [];
         this.recipes.push(...Watchedrecipes);
-        //   console.log(this.recipes);
       } catch (error) {
         console.log(error);
       }
@@ -58,7 +53,6 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  // min-height: 400px;
   margin-top: 76px;
 }
 </style>

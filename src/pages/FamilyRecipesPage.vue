@@ -75,6 +75,5 @@ export default {
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; 
-  // text-align: center;
 } 
 </style>

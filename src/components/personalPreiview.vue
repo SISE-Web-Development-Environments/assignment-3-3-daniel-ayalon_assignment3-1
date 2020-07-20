@@ -95,10 +95,6 @@ li {
   height: 400px;
   background-color: rgba(189, 184, 184, 0.699);
 }
-/* .recipe-title{
-  width: 300px;
-  
-} */
 .recipe-title {
   color: #ffffff;
   font-size: 45px;
@@ -124,7 +120,6 @@ li {
   position: absolute;
   top: 90px;
   left: 35px;
-  /* right: 9px; */
   opacity: 0.8;
   background-color: #008cba;
   overflow: hidden;

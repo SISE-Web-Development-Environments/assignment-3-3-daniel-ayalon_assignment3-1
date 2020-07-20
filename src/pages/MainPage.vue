@@ -65,7 +65,6 @@ h2{
 .title {
   padding-top: 50px;
   color: whitesmoke;
-  // text-align: center;
 	font-weight: normal;
 	font-family: 'Ultra', sans-serif;   
 	font-size: 36px;

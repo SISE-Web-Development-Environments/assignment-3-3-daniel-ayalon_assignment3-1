@@ -99,12 +99,7 @@ export default {
         try {
           response = await this.axios.get(
             `http://localhost:3000/user/PersonalRecipes/recipeID/${this.$route.params.recipeId}`
-
-            //params: { id: this.$route.params.recipeId }
           );
-
-          // console.log("response.status", response.status);
-
           if (response.status !== 200) this.$router.replace("/NotFound");
         } catch (error) {
           console.log("error.response.status", error.response.status);
@@ -200,7 +195,7 @@ li {
 
 .container {
   max-width: 900px;
-  background-color: rgba(255, 255, 255, 0.651);
+  background-color: rgba(170, 136, 108, 0.6);
   background-origin: border-box;
   height: 150%; /* You must set a specified height */
   width: 100%;

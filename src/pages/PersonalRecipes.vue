@@ -39,7 +39,6 @@ export default {
         const PersonalRecipes = response.data;
         this.persRecipes = [];
         this.persRecipes.push(...PersonalRecipes);
-        // console.log(this.recipes);
       } catch (error) {
         if(error.response.data.message === 'unauthorized'){
           this.$root.store.logout();
